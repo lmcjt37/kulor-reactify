@@ -1,0 +1,22 @@
+.fullPage {
+    background-color: #5B3256;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    padding: 0;
+    position: absolute;
+}
+
+.centerControls {
+    margin: auto;
+    padding-top: 10%;
+    position: relative;
+    height: 50%;
+    width: 50%;
+}
+
+.header {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
