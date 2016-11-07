@@ -1,5 +1,6 @@
 import React from 'react';
-import Slider from 'react-toolbox/lib/slider';
+import { Slider } from 'react-toolbox/lib/slider';
+import themedSlider from '../theme/themedSlider.scss';
 
 class Sliders extends React.Component {
   state = {
@@ -17,12 +18,12 @@ class Sliders extends React.Component {
   render () {
     return (
       <section>
-        <p>Hue</p>
-        <Slider min={0} max={360} step={1} editable value={this.state.hue} onChange={this.handleChange.bind(this, 'hue')} />
-        <p>Saturation</p>
-        <Slider min={0} max={100} step={1} editable value={this.state.saturation} onChange={this.handleChange.bind(this, 'saturation')} />
-        <p>Lightness</p>
-        <Slider min={0} max={100} step={1} editable value={this.state.lightness} onChange={this.handleChange.bind(this, 'lightness')} />
+        <p className={themedSlider.sliderLabel} >Hue</p>
+        <Slider min={0} max={360} step={1} editable value={this.state.hue} onChange={this.handleChange.bind(this, 'hue')} theme={themedSlider} />
+        <p className={themedSlider.sliderLabel} >Saturation</p>
+        <Slider min={0} max={100} step={1} editable value={this.state.saturation} onChange={this.handleChange.bind(this, 'saturation')} theme={themedSlider} />
+        <p className={themedSlider.sliderLabel} >Lightness</p>
+        <Slider min={0} max={100} step={1} editable value={this.state.lightness} onChange={this.handleChange.bind(this, 'lightness')} theme={themedSlider} />
       </section>
     );
   }

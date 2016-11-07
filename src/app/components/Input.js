@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
+import themedInput from '../theme/themedInput.scss';
 
 class Inputs extends React.Component {
   state = {
@@ -14,8 +15,8 @@ class Inputs extends React.Component {
   render () {
       return (
           <section>
-            <Input type='text' label='RGB' name='rgb' value={this.state.rgb} onChange={this.handleChange.bind(this, 'rgb')} maxLength={9 } />
-            <Input type='text' label='HEX' name='hex' value={this.state.hex} onChange={this.handleChange.bind(this, 'hex')} maxLength={6 } />
+            <Input type='text' label='RGB' name='rgb' value={this.state.rgb} onChange={this.handleChange.bind(this, 'rgb')} maxLength={9 } theme={themedInput} />
+            <Input type='text' label='HEX' name='hex' value={this.state.hex} onChange={this.handleChange.bind(this, 'hex')} maxLength={6 } theme={themedInput} />
           </section>
       );
   }

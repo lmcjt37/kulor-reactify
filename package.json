@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-toolbox/react-toolbox-example.git"
-},
+  },
   "keywords": [
     "components",
     "material design",
@@ -59,5 +59,8 @@
     "start": "node server",
     "dev": "npm run build && npm run start"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-css-themr": "^1.6.0"
+  }
 }
