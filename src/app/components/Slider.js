@@ -17,7 +17,7 @@ class Sliders extends React.Component {
 
   render () {
     return (
-      <section>
+      <section className={themedSlider.wrapper}>
         <p className={themedSlider.sliderLabel} >Hue</p>
         <Slider min={0} max={360} step={1} editable value={this.state.hue} onChange={this.handleChange.bind(this, 'hue')} theme={themedSlider} />
         <p className={themedSlider.sliderLabel} >Saturation</p>

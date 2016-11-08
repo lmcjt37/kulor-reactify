@@ -1,10 +1,19 @@
 .inputElement {
     border-bottom: 1px solid #fff;
     color: #ffffff;
+    font-size: 3rem;
+    text-align: center;
 }
 .label {
     color: rgba(255, 255, 255, 0.4);
+    font-size: 3rem;
+    top: 4rem;
 }
 .counter {
     color: rgba(255, 255, 255, 0.4);
+}
+.wrapper {
+    margin: auto;
+    position: relative;
+    width: 40%;
 }
