@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from './theme/main.css';
+import Main from './theme/main.scss';
 
 import Inputs from './components/Input.js';
 import Sliders from './components/Slider.js';

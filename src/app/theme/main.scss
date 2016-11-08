@@ -1,3 +1,6 @@
+$break-small: 480px;
+$break-medium: 767px;
+
 .fullPage {
     background-color: #5B3256;
     margin: 0;
@@ -13,6 +16,14 @@
     position: relative;
     height: 50%;
     width: 50%;
+    @media screen and (max-width: $break-medium) {
+        padding-top: 18%;
+        width: 70%;
+    }
+    @media screen and (max-width: $break-small) {
+        padding-top: 22%;
+        width: 90%;
+    }
 }
 
 .header {

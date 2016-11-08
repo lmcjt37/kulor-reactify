@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from '../theme/main.css';
+import Main from '../theme/main.scss';
 
 class Header extends React.Component {
 
