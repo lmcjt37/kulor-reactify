@@ -3,13 +3,17 @@ import Input from 'react-toolbox/lib/input';
 import themedInput from '../theme/themedInput.scss';
 
 class Inputs extends React.Component {
-  state = {
-      rgb: '',
-      hex: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+        rgb: '',
+        hex: ''
+    };
+  }
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
+    this.props.onInputStateChange(this.state);
   };
 
   render () {

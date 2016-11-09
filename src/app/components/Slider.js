@@ -3,16 +3,20 @@ import { Slider } from 'react-toolbox/lib/slider';
 import themedSlider from '../theme/themedSlider.scss';
 
 class Sliders extends React.Component {
-  state = {
-    hue: 0,
-    saturation: 0,
-    lightness: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hue: 0,
+      saturation: 0,
+      lightness: 0
+    };
+  }
 
   handleChange = (slider, value) => {
     const newState = {};
     newState[slider] = value;
     this.setState(newState);
+    this.props.onSliderStateChange(this.state);
   };
 
   render () {
