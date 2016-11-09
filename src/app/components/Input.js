@@ -13,7 +13,7 @@ class Inputs extends React.Component {
 
   handleChange = (name, value) => {
     this.setState({...this.state, [name]: value});
-    this.props.onInputStateChange(this.state);
+    this.props.onStateChange(this.state);
   };
 
   render () {
