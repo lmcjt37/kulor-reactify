@@ -13,9 +13,7 @@ class Sliders extends React.Component {
   }
 
   handleChange = (slider, value) => {
-    const newState = {};
-    newState[slider] = value;
-    this.setState(newState);
+    this.setState({[slider]: value});
     this.props.onStateChange(this.state);
   };
 
