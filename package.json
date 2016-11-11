@@ -61,6 +61,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "react-css-themr": "^1.6.0"
+    "react-css-themr": "^1.6.0",
+    "tinycolor2": "^1.4.1"
   }
 }
