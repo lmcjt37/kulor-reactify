@@ -5,16 +5,16 @@ This is a colour conversion app that allows you to convert colours between RGB, 
 
 ### Getting Started
 1. Clone this repository
-2. Run `npm install && npm run dev`, this will build and start up the server
-3. Visit `0.0.0.0:8080` or `localhost:8080` in your browser (You can also visit the app on your device when on the same network)
+2. Run `npm install && npm run dev`, this will install all dependencies, build and start up the server
+3. Visit `localhost:8080` in your browser (You can also visit the app on your device when on the same network)
 
 ### Tools
 - React-toolbox (http://react-toolbox.com/)
 - SASS (http://sass-lang.com/)
 - TinyColour (https://github.com/bgrins/TinyColor)
 
-### Future
+### Pipeline
 - Add alpha
+- Ability to lighten and darken
 - Randomisation
 - Additional colour modes
-- Ability to lighten and darken
