@@ -12,3 +12,9 @@ This is a colour conversion app that allows you to convert colours between RGB, 
 - React-toolbox (http://react-toolbox.com/)
 - SASS (http://sass-lang.com/)
 - TinyColour (https://github.com/bgrins/TinyColor)
+
+### Future
+- Add alpha
+- Randomisation
+- Additional colour modes
+- Ability to lighten and darken
