@@ -5,23 +5,21 @@ function stripToRaw(colour) {
 };
 
 function convertRgb(data) {
-    var rgb = stripToRaw(data.rgb);
-    console.log(rgb);
-    // return {
-    //     "rgb": rgb,
-    //     "hex": tinycolor(rgb).toHex(),
-    //     "hue": tinycolor(rgb).toHsl()["h"],
-    //     "saturation": tinycolor(rgb).toHsl()["s"],
-    //     "lightness": tinycolor(rgb).toHsl()["l"],
-    //     "isDark": tinycolor(rgb).isDark()
-    // };
+    console.log(data.rgb);
+    return {
+        "rgb": data.rgb,
+        "hex": tinycolor(rgb).toHex(),
+        "hue": tinycolor(rgb).toHsl()["h"],
+        "saturation": tinycolor(rgb).toHsl()["s"],
+        "lightness": tinycolor(rgb).toHsl()["l"],
+        "isDark": tinycolor(rgb).isDark()
+    };
 };
 
 function convertHex(data) {
-    var hex = stripToRaw(data.hex);
     return {
         "rgb": stripToRaw(tinycolor(hex).toRgbString()),
-        "hex": hex,
+        "hex": data.hex,
         "hue": tinycolor(hex).toHsl()["h"],
         "saturation": tinycolor(hex).toHsl()["s"],
         "lightness": tinycolor(hex).toHsl()["l"],
@@ -47,13 +45,31 @@ function convertHsl(data) {
 
 var helper = {
 
+    validateRgb: function(rgb) {
+        if (rgb.length === 3 || rgb.length === 6 || rgb.length === 9) {
+            return true;
+        }
+        return false;
+    },
+
+    validateHex: function(hex) {
+        if (hex.length === 3 || hex.length === 6) {
+            return true;
+        }
+        return false;
+    },
+
     convertColours: function(data) {
         switch(data.type) {
             case 'rgb':
-                return convertRgb(data);
+                if (helper.validateRgb(data.rgb)) {
+                    return convertRgb(data);
+                }
                 break;
             case 'hex':
-                return convertHex(data);
+                if (helper.validateHex(data.hex)) {
+                    return convertHex(data);
+                }
                 break;
             case 'hue':
             case 'saturation':
