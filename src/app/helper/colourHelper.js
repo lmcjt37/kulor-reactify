@@ -1,13 +1,33 @@
-var tinycolor = require("tinycolor2");
+var tinycolor = require("tinycolor2"),
+    helper;
 
-function stripToRaw(colour) {
-    return JSON.stringify(colour).replace(/[^\w\s]|(^rgb)/g, "");
+function parseRgb(rgb, type) {
+    switch(type) {
+        case "object":
+            var tmp = helper.stripToRaw(rgb).split(/(\s|\,)/g);
+            return {
+                r: tmp[0],
+                g: tmp[1],
+                b: tmp[2]
+            };
+            break;
+        case "string":
+            return rgb.r + "," + rgb.g + "," + rgb.b;
+    }
+};
+
+function objectifyHsl(data) {
+    return {
+        h: data.hue,
+        s: data.saturation,
+        l: data.lightness
+    };
 };
 
 function convertRgb(data) {
-    console.log(data.rgb);
+    var rgb = parseRgb(data.rgb, "object");
     return {
-        "rgb": data.rgb,
+        "rgb": parseRgb(rgb, "string"),
         "hex": tinycolor(rgb).toHex(),
         "hue": tinycolor(rgb).toHsl()["h"],
         "saturation": tinycolor(rgb).toHsl()["s"],
@@ -18,23 +38,19 @@ function convertRgb(data) {
 
 function convertHex(data) {
     return {
-        "rgb": stripToRaw(tinycolor(hex).toRgbString()),
+        "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
-        "hue": tinycolor(hex).toHsl()["h"],
-        "saturation": tinycolor(hex).toHsl()["s"],
-        "lightness": tinycolor(hex).toHsl()["l"],
-        "isDark": tinycolor(hex).isDark()
+        "hue": tinycolor(data.hex).toHsl()["h"],
+        "saturation": tinycolor(data.hex).toHsl()["s"],
+        "lightness": tinycolor(data.hex).toHsl()["l"],
+        "isDark": tinycolor(data.hex).isDark()
     };
 }
 
 function convertHsl(data) {
-    var hsl = {
-        h: data.hue,
-        s: data.saturation,
-        l: data.lightness
-    };
+    var hsl = objectifyHsl(data);
     return {
-        "rgb": stripToRaw(tinycolor(hsl).toRgbString()),
+        "rgb": parseRgb(tinycolor(hsl).toRgb(), "string"),
         "hex": tinycolor(hsl).toHex(),
         "hue": data.hue,
         "saturation": data.saturation,
@@ -46,7 +62,7 @@ function convertHsl(data) {
 var helper = {
 
     validateRgb: function(rgb) {
-        if (rgb.length === 3 || rgb.length === 6 || rgb.length === 9) {
+        if (rgb.length === 11) {
             return true;
         }
         return false;
@@ -59,17 +75,24 @@ var helper = {
         return false;
     },
 
+    validateColours: function(colours) {
+        return (
+            helper.validateRgb(colours.rgb) ||
+            helper.validateHex(colours.hex)
+        );
+    },
+
+    stripToRaw: function(colour) {
+        return JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+    },
+
     convertColours: function(data) {
         switch(data.type) {
             case 'rgb':
-                if (helper.validateRgb(data.rgb)) {
-                    return convertRgb(data);
-                }
+                return convertRgb(data);
                 break;
             case 'hex':
-                if (helper.validateHex(data.hex)) {
-                    return convertHex(data);
-                }
+                return convertHex(data);
                 break;
             case 'hue':
             case 'saturation':
@@ -77,7 +100,6 @@ var helper = {
                 return convertHsl(data);
                 break;
         }
-
     }
 
 };
