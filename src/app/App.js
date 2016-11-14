@@ -20,10 +20,8 @@ class App extends React.Component {
     }
 
     handleStateChange = (data) => {
-        this.setState(data);
-        
         if (ColourHelper.validateColours(data)) {
-            console.log(ColourHelper.convertColours(data));
+            this.setState(ColourHelper.convertColours(data));
         }
     }
 
@@ -32,8 +30,8 @@ class App extends React.Component {
             <div className={Main.fullPage}>
                 <Header />
                 <div className={Main.centerControls}>
-                    <Inputs onStateChange={this.handleStateChange}/>
-                    <Sliders onStateChange={this.handleStateChange}/>
+                    <Inputs {...this.state} onStateChange={this.handleStateChange}/>
+                    <Sliders {...this.state} onStateChange={this.handleStateChange}/>
                 </div>
             </div>
         )

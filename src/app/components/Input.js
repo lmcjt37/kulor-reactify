@@ -9,9 +9,9 @@ class Inputs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        rgb: '',
-        hex: '',
-        type: ''
+      rgb: '',
+      hex: '',
+      type: ''
     };
   }
 
@@ -38,7 +38,15 @@ class Inputs extends React.Component {
   };
 
   handleChange = (name, value) => {
-      this.setState({[name]: ColourHelper.stripToRaw(value), 'type': name});
+      console.log(name);
+      console.log(value);
+      var trimmedValue;
+      if (name === "rgb") {
+          trimmedValue = ColourHelper.trimRgb(value);
+      } else if(name === "hex") {
+          trimmedValue = ColourHelper.trimHex(value);
+      }
+      this.setState({[name]: trimmedValue, 'type': name});
   };
 
   render () {
