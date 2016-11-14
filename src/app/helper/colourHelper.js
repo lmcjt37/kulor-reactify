@@ -40,7 +40,7 @@ function convertRgb(data) {
     return {
         "rgb": parseRgb(rgb, "string"),
         "hex": tinycolor(rgb).toHex(),
-        "hue": tinycolor(rgb).toHsl()["h"],
+        "hue": parseDecimal(tinycolor(rgb).toHsl()["h"]),
         "saturation": parseDecimal(tinycolor(rgb).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
         "isDark": tinycolor(rgb).isDark()
@@ -51,7 +51,7 @@ function convertHex(data) {
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
-        "hue": tinycolor(data.hex).toHsl()["h"],
+        "hue": parseDecimal(tinycolor(data.hex).toHsl()["h"]),
         "saturation": parseDecimal(tinycolor(data.hex).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
         "isDark": tinycolor(data.hex).isDark()
@@ -98,7 +98,7 @@ var helper = {
     },
 
     trimHex: function(colour) {
-        return JSON.stringify(colour).replace(/[^\w\s]|[^abcdef]/g, "");
+        return JSON.stringify(colour).replace(/[^a-f1-6\s]/g, "");
     },
 
     convertColours: function(data) {
