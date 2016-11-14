@@ -4,7 +4,13 @@ var tinycolor = require("tinycolor2"),
 function parseRgb(rgb, type) {
     switch(type) {
         case "object":
-            var tmp = helper.stripToRaw(rgb).split(/(\s|\,)/g);
+            var re,
+                tmp = helper.trimRgb(rgb);
+            if (rgb.indexOf(",") > -1) {
+                tmp = tmp.split(",");
+            } else {
+                tmp = tmp.split(" ");
+            }
             return {
                 r: tmp[0],
                 g: tmp[1],
@@ -13,7 +19,12 @@ function parseRgb(rgb, type) {
             break;
         case "string":
             return rgb.r + "," + rgb.g + "," + rgb.b;
+            break;
     }
+};
+
+function parseDecimal(dec) {
+    return Math.round((dec.toFixed(2)) * 100);
 };
 
 function objectifyHsl(data) {
@@ -30,8 +41,8 @@ function convertRgb(data) {
         "rgb": parseRgb(rgb, "string"),
         "hex": tinycolor(rgb).toHex(),
         "hue": tinycolor(rgb).toHsl()["h"],
-        "saturation": tinycolor(rgb).toHsl()["s"],
-        "lightness": tinycolor(rgb).toHsl()["l"],
+        "saturation": parseDecimal(tinycolor(rgb).toHsl()["s"]),
+        "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
         "isDark": tinycolor(rgb).isDark()
     };
 };
@@ -41,8 +52,8 @@ function convertHex(data) {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
         "hue": tinycolor(data.hex).toHsl()["h"],
-        "saturation": tinycolor(data.hex).toHsl()["s"],
-        "lightness": tinycolor(data.hex).toHsl()["l"],
+        "saturation": parseDecimal(tinycolor(data.hex).toHsl()["s"]),
+        "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
         "isDark": tinycolor(data.hex).isDark()
     };
 }
@@ -62,7 +73,7 @@ function convertHsl(data) {
 var helper = {
 
     validateRgb: function(rgb) {
-        if (rgb.length === 11) {
+        if (rgb.length > 0) {
             return true;
         }
         return false;
@@ -82,8 +93,12 @@ var helper = {
         );
     },
 
-    stripToRaw: function(colour) {
+    trimRgb: function(colour) {
         return JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+    },
+
+    trimHex: function(colour) {
+        return JSON.stringify(colour).replace(/[^\w\s]|[^abcdef]/g, "");
     },
 
     convertColours: function(data) {
