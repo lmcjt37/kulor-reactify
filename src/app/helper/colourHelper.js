@@ -47,7 +47,7 @@ function convertRgb(data) {
         "hue": parseDecimal(tinycolor(rgb).toHsl()["h"]),
         "saturation": parseDecimal(tinycolor(rgb).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
-        "isDark": tinycolor(rgb).isDark(),
+        "theme": tinycolor(rgb).isDark() ? "light" : "dark",
         "bgColour": tinycolor(rgb).toHex()
     };
 };
@@ -59,7 +59,7 @@ function convertHex(data) {
         "hue": parseDecimal(tinycolor(data.hex).toHsl()["h"]),
         "saturation": parseDecimal(tinycolor(data.hex).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
-        "isDark": tinycolor(data.hex).isDark(),
+        "theme": tinycolor(data.hex).isDark() ? "light" : "dark",
         "bgColour": data.hex
     };
 }
@@ -72,7 +72,7 @@ function convertHsl(data) {
         "hue": data.hue,
         "saturation": data.saturation,
         "lightness": data.lightness,
-        "isDark": tinycolor(hsl).isDark(),
+        "theme": tinycolor(hsl).isDark() ? "light" : "dark",
         "bgColour": tinycolor(hsl).toHex()
     };
 };

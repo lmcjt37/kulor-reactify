@@ -3,7 +3,8 @@ import Input from 'react-toolbox/lib/input';
 
 import ColourHelper from '../helper/colourHelper.js';
 
-import themedInput from '../theme/themedInput.scss';
+import themedInputLight from '../theme/themedInputLight.scss';
+import themedInputDark from '../theme/themedInputDark.scss';
 
 class Inputs extends React.Component {
   constructor(props) {
@@ -36,6 +37,12 @@ class Inputs extends React.Component {
   };
 
   render () {
+      var themedInput;
+      if (this.props.theme === "light") {
+          themedInput = themedInputLight;
+      } else {
+          themedInput = themedInputDark;
+      }
       return (
           <section className={themedInput.wrapper} >
             <div className={themedInput.rgbWrapper} data-ref="rgb" >

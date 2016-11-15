@@ -1,6 +1,8 @@
 import React from 'react';
 import { Slider } from 'react-toolbox/lib/slider';
-import themedSlider from '../theme/themedSlider.scss';
+
+import themedSliderLight from '../theme/themedSliderLight.scss';
+import themedSliderDark from '../theme/themedSliderDark.scss';
 
 class Sliders extends React.Component {
   constructor(props) {
@@ -19,6 +21,12 @@ class Sliders extends React.Component {
   };
 
   render () {
+      var themedSlider;
+      if (this.props.theme === "light") {
+          themedSlider = themedSliderLight;
+      } else {
+          themedSlider = themedSliderDark;
+      }
     return (
       <section className={themedSlider.wrapper}>
         <p className={themedSlider.sliderLabel} >Hue</p>

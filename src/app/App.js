@@ -16,7 +16,7 @@ class App extends React.Component {
             saturation: 0,
             lightness: 0,
             type: "",
-            isDark: true,
+            theme: "light",
             bgColour: "5B3256"
         };
     }
