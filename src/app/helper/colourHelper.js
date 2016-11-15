@@ -24,7 +24,11 @@ function parseRgb(rgb, type) {
 };
 
 function parseDecimal(dec) {
-    return Math.round((dec.toFixed(2)) * 100);
+    if (dec > 1) {
+        return Math.round(dec.toFixed(2));
+    } else {
+        return Math.round((dec.toFixed(2)) * 100);
+    }
 };
 
 function objectifyHsl(data) {
