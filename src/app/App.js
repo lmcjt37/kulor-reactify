@@ -15,7 +15,9 @@ class App extends React.Component {
             hue: 0,
             saturation: 0,
             lightness: 0,
-            type: ""
+            type: "",
+            isDark: true,
+            bgColour: "5B3256"
         };
     }
 
@@ -29,7 +31,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className={Main.fullPage}>
+            <div className={Main.fullPage} style={{backgroundColor: "#" + this.state.bgColour }}>
                 <Header />
                 <div className={Main.centerControls}>
                     <Inputs rgb={this.state.rgb} hex={this.state.hex} type={this.state.type} onStateChange={this.handleStateChange.bind(this)}/>
