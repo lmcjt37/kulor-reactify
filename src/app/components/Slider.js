@@ -8,7 +8,14 @@ class Sliders extends React.Component {
   }
 
   handleChange = (slider, value) => {
-    this.props.onStateChange({[slider]: value, 'type': slider});
+      const newState = {
+          hue: this.props.hue,
+          saturation: this.props.saturation,
+          lightness: this.props.lightness
+      };
+      newState[slider] = value;
+      newState.type = slider;
+      this.props.onStateChange(newState);
   };
 
   render () {
