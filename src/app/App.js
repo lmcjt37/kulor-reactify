@@ -30,8 +30,8 @@ class App extends React.Component {
             <div className={Main.fullPage}>
                 <Header />
                 <div className={Main.centerControls}>
-                    <Inputs onStateChange={this.handleStateChange.bind(this)}/>
-                    <Sliders onStateChange={this.handleStateChange.bind(this)}/>
+                    <Inputs rgb={this.state.rgb} hex={this.state.hex} type={this.state.type} onStateChange={this.handleStateChange.bind(this)}/>
+                    <Sliders hue={this.state.hue} saturation={this.state.saturation} lightness={this.state.lightness} type={this.state.type} onStateChange={this.handleStateChange.bind(this)}/>
                 </div>
             </div>
         )

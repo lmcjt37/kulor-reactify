@@ -8,16 +8,7 @@ import themedInput from '../theme/themedInput.scss';
 class Inputs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rgb: '',
-      hex: '',
-      type: ''
-    };
   }
-
-  passToParent = () => {
-      this.props.onStateChange(this.state);
-  };
 
   handleFocus = (name) => {
       var elements = document.querySelectorAll('[data-ref=' + name + ']')[0].getElementsByTagName("p");
@@ -38,7 +29,7 @@ class Inputs extends React.Component {
   };
 
   handleChange = (name, value) => {
-      this.setState({
+      this.props.onStateChange({
           [name]: (name === "rgb") ? ColourHelper.trimRgb(value) : ColourHelper.trimHex(value),
           'type': name
       });
@@ -46,15 +37,15 @@ class Inputs extends React.Component {
 
   render () {
       return (
-          <section className={themedInput.wrapper} onKeyUp={this.passToParent.bind(this)}>
+          <section className={themedInput.wrapper} >
             <div className={themedInput.rgbWrapper} data-ref="rgb" >
                 <p className={themedInput.inputPrefix} >rgb(</p>
-                <Input type='text' label='RGB' name='rgb' value={this.state.rgb} onFocus={this.handleFocus.bind(this, 'rgb')} onBlur={this.handleBlur.bind(this, 'rgb')} onChange={this.handleChange.bind(this, 'rgb')} theme={themedInput} />
+                <Input type='text' label='RGB' name='rgb' value={this.props.rgb} onFocus={this.handleFocus.bind(this, 'rgb')} onBlur={this.handleBlur.bind(this, 'rgb')} onChange={this.handleChange.bind(this, 'rgb')} theme={themedInput} />
                 <p className={themedInput.inputSuffix} >)</p>
             </div>
             <div className={themedInput.hexWrapper} data-ref="hex" >
                 <p className={themedInput.inputPrefix} >#</p>
-                <Input type='text' label='HEX' name='hex' value={this.state.hex} onFocus={this.handleFocus.bind(this, 'hex')} onBlur={this.handleBlur.bind(this, 'hex')} onChange={this.handleChange.bind(this, 'hex')} theme={themedInput} />
+                <Input type='text' label='HEX' name='hex' value={this.props.hex} onFocus={this.handleFocus.bind(this, 'hex')} onBlur={this.handleBlur.bind(this, 'hex')} onChange={this.handleChange.bind(this, 'hex')} theme={themedInput} />
             </div>
           </section>
       );
