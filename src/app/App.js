@@ -21,7 +21,11 @@ class App extends React.Component {
 
     handleStateChange = (data) => {
         if (ColourHelper.validateColours(data)) {
+            console.log("do convert");
             this.setState(ColourHelper.convertColours(data));
+        } else {
+            console.log("do NOT convert");
+            this.setState(data);
         }
     }
 

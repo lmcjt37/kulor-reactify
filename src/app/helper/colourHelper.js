@@ -77,10 +77,7 @@ function convertHsl(data) {
 var helper = {
 
     validateRgb: function(rgb) {
-        if (rgb.length > 0) {
-            return true;
-        }
-        return false;
+        return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
     },
 
     validateHex: function(hex) {
@@ -90,15 +87,27 @@ var helper = {
         return false;
     },
 
-    validateColours: function(colours) {
-        return (
-            helper.validateRgb(colours.rgb) ||
-            helper.validateHex(colours.hex)
-        );
+    validateColours: function(colour) {
+        switch (colour.type) {
+            case "rgb":
+                return helper.validateRgb(colour.rgb);
+                break;
+            case "hex":
+                return helper.validateHex(colour.hex);
+                break;
+            default:
+                // hsl values will default
+                return true;
+        }
     },
 
     trimRgb: function(colour) {
-        return JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+        var tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+        if (tmp.substring(0, 1) === " ") {
+            return tmp.substring(1);
+        } else {
+            return tmp;
+        }
     },
 
     trimHex: function(colour) {
