@@ -22,10 +22,10 @@ class Sliders extends React.Component {
 
   render () {
       var themedSlider;
-      if (this.props.theme === "light") {
-          themedSlider = themedSliderLight;
-      } else {
+      if (this.props.theme === "dark") {
           themedSlider = themedSliderDark;
+      } else {
+          themedSlider = themedSliderLight;
       }
     return (
       <section className={themedSlider.wrapper}>

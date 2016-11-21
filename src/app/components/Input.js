@@ -38,10 +38,10 @@ class Inputs extends React.Component {
 
   render () {
       var themedInput;
-      if (this.props.theme === "light") {
-          themedInput = themedInputLight;
-      } else {
+      if (this.props.theme === "dark") {
           themedInput = themedInputDark;
+      } else {
+          themedInput = themedInputLight;
       }
       return (
           <section className={themedInput.wrapper} >

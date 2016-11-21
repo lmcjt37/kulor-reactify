@@ -34,8 +34,8 @@ class App extends React.Component {
             <div className={Main.fullPage} style={{backgroundColor: "#" + this.state.bgColour }}>
                 <Header />
                 <div className={Main.centerControls}>
-                    <Inputs rgb={this.state.rgb} hex={this.state.hex} type={this.state.type} onStateChange={this.handleStateChange.bind(this)}/>
-                    <Sliders hue={this.state.hue} saturation={this.state.saturation} lightness={this.state.lightness} type={this.state.type} onStateChange={this.handleStateChange.bind(this)}/>
+                    <Inputs {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
+                    <Sliders {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
                 </div>
             </div>
         )
