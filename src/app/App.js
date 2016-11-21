@@ -21,9 +21,18 @@ class App extends React.Component {
         };
     }
 
+    handleFocusOfOtherElement = (name) => {
+        var otherEl = (name === "rgb") ? "hex" : "rgb";
+        var elements = document.querySelectorAll('[data-ref=' + otherEl + ']')[0].getElementsByTagName("p");
+        for(var i = 0; i < elements.length; i++) {
+                elements[i].style.opacity = 1;
+        }
+    }
+
     handleStateChange = (data) => {
         if (ColourHelper.validateColours(data)) {
             this.setState(ColourHelper.convertColours(data));
+            this.handleFocusOfOtherElement(data.type);
         } else {
             this.setState(data);
         }
