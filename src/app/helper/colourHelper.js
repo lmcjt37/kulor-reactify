@@ -114,7 +114,7 @@ var helper = {
     },
 
     trimHex: function(colour) {
-        return JSON.stringify(colour).replace(/[^a-f0-6\s]/g, "");
+        return JSON.stringify(colour).replace(/[^a-f0-9\s]/g, "");
     },
 
     convertColours: function(data) {
