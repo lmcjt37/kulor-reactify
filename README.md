@@ -16,6 +16,7 @@ Working project: http://lmcjt.com/kulor
 - TinyColour (https://github.com/bgrins/TinyColor)
 
 ### Pipeline
+- Fix HMR error in production [Failed to load resource (__webpack.hmr)](https://github.com/lmcjt37/kulor-reactify/issues/1)
 - Add alpha
 - Ability to lighten and darken
 - Randomisation
