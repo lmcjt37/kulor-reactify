@@ -56,7 +56,8 @@
     "webpack-hot-middleware": "~2.12.2"
   },
   "scripts": {
-    "build": "webpack --config webpack.config",
+    "build:dev": "webpack --config webpack.config",
+    "build:prod": "webpack --config webpack.config.production",
     "start": "node server"
   },
   "license": "MIT",

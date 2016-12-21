@@ -16,11 +16,7 @@ app.use(webpackDevMiddleware(compiler, {
   stats: { color: true }
 }));
 
-app.use(webpackHotMiddleware(compiler, {
-  log: console.log,
-  path: '/__webpack_hmr',
-  heartbeat: 10 * 1000,
-}));
+app.use(webpackHotMiddleware(compiler));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './src/public/index.html'));
