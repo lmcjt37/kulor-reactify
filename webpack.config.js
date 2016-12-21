@@ -7,6 +7,7 @@ module.exports = {
   context: __dirname,
   devtool: 'inline-source-map',
   entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './src/app/client.js'
   ],
   output: {

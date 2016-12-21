@@ -9,15 +9,18 @@ const path = require('path');
 const app = express();
 const compiler = webpack(config);
 
-const middleware = webpackDevMiddleware(compiler, {
+app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
   silent: false,
   stats: { color: true }
-});
+}));
 
-app.use(middleware);
-app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler, {
+  log: console.log,
+  path: '/__webpack_hmr',
+  heartbeat: 10 * 1000,
+}));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './src/public/index.html'));
