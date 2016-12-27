@@ -6,10 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: __dirname,
   devtool: 'inline-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './src/app/client.js'
-  ],
+  entry: getEntrySources(['./src/app/client.js']),
   output: {
     path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
@@ -40,18 +37,25 @@ module.exports = {
     data: '@import "theme/_config.scss";',
     includePaths: [path.resolve(__dirname, './src/app')]
   },
-  plugins: [
+  plugins: getPluginSources([
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.bundle.js',
-      minChunks: Infinity
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
-  ]
+    new webpack.NoErrorsPlugin()
+  ])
 };
+
+function getEntrySources(sources) {
+    if (process.env.NODE_ENV !== 'production') {
+        sources.push('webpack-hot-middleware/client');
+    }
+    return sources;
+}
+
+function getPluginSources(plugins) {
+    if (process.env.NODE_ENV !== 'production') {
+        plugins.concat([
+            new webpack.HotModuleReplacementPlugin(),
+        ]);
+    }
+    return plugins;
+}
