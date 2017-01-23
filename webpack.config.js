@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: getEntrySources(['./src/app/client.js']),
   output: {
-    path: path.join(__dirname, '/build'),
+    path: path.join(__dirname, '/src/public'),
     filename: 'bundle.js',
     publicPath: '/'
   },
