@@ -1,11 +1,10 @@
 const tinycolor = require("tinycolor2");
-const helper;
+let helper = {};
 
-parseRgb(rgb, type) => {
+let parseRgb = (rgb, type) => {
     switch(type) {
         case "object":
-            var re,
-                tmp = helper.trimRgb(rgb);
+            let tmp = helper.trimRgb(rgb);
             if (rgb.indexOf(",") > -1) {
                 tmp = tmp.split(",");
             } else {
@@ -23,7 +22,7 @@ parseRgb(rgb, type) => {
     }
 };
 
-parseDecimal(dec) => {
+let parseDecimal = (dec) => {
     if (dec > 1) {
         return Math.round(dec.toFixed(2));
     } else {
@@ -31,7 +30,7 @@ parseDecimal(dec) => {
     }
 };
 
-objectifyHsl(data) => {
+let objectifyHsl = (data) => {
     return {
         h: data.hue,
         s: data.saturation,
@@ -39,7 +38,7 @@ objectifyHsl(data) => {
     };
 };
 
-convertRgb(data) => {
+let convertRgb = (data) => {
     let rgb = parseRgb(data.rgb, "object");
     return {
         "rgb": parseRgb(rgb, "string"),
@@ -52,7 +51,7 @@ convertRgb(data) => {
     };
 };
 
-convertHex(data) => {
+let convertHex = (data) => {
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
@@ -64,7 +63,7 @@ convertHex(data) => {
     };
 }
 
-convertHsl(data) => {
+let convertHsl = (data) => {
     let hsl = objectifyHsl(data);
     return {
         "rgb": parseRgb(tinycolor(hsl).toRgb(), "string"),
@@ -107,13 +106,16 @@ helper = {
     trimRgb: (colour) => {
         let tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
         let count = 0;
+        if (tmp.substring(11, 12) === ",") {
+            tmp = tmp.substring(0, 11);
+        }
         if (tmp.substring(0, 1) === " ") {
             tmp = tmp.substring(1);
         }
-        count = JSON.stringify(colour).replace(/,/g, "").length;
+        count = tmp.replace(/,/g, "").length;
 
         if (count >= 10) {
-            return tmp.substring(0, 9);
+            return tmp.substring(0, 11);
         } else {
             return tmp;
         }
@@ -148,4 +150,5 @@ helper = {
     }
 
 };
+
 module.exports = helper;
