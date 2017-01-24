@@ -1,7 +1,7 @@
-var tinycolor = require("tinycolor2"),
-    helper;
+const tinycolor = require("tinycolor2");
+const helper;
 
-function parseRgb(rgb, type) {
+parseRgb(rgb, type) => {
     switch(type) {
         case "object":
             var re,
@@ -23,7 +23,7 @@ function parseRgb(rgb, type) {
     }
 };
 
-function parseDecimal(dec) {
+parseDecimal(dec) => {
     if (dec > 1) {
         return Math.round(dec.toFixed(2));
     } else {
@@ -31,7 +31,7 @@ function parseDecimal(dec) {
     }
 };
 
-function objectifyHsl(data) {
+objectifyHsl(data) => {
     return {
         h: data.hue,
         s: data.saturation,
@@ -39,8 +39,8 @@ function objectifyHsl(data) {
     };
 };
 
-function convertRgb(data) {
-    var rgb = parseRgb(data.rgb, "object");
+convertRgb(data) => {
+    let rgb = parseRgb(data.rgb, "object");
     return {
         "rgb": parseRgb(rgb, "string"),
         "hex": tinycolor(rgb).toHex(),
@@ -52,7 +52,7 @@ function convertRgb(data) {
     };
 };
 
-function convertHex(data) {
+convertHex(data) => {
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
@@ -64,8 +64,8 @@ function convertHex(data) {
     };
 }
 
-function convertHsl(data) {
-    var hsl = objectifyHsl(data);
+convertHsl(data) => {
+    let hsl = objectifyHsl(data);
     return {
         "rgb": parseRgb(tinycolor(hsl).toRgb(), "string"),
         "hex": tinycolor(hsl).toHex(),
@@ -77,20 +77,20 @@ function convertHsl(data) {
     };
 };
 
-var helper = {
+helper = {
 
-    validateRgb: function(rgb) {
+    validateRgb: (rgb) => {
         return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
     },
 
-    validateHex: function(hex) {
+    validateHex: (hex) => {
         if (hex.length === 3 || hex.length === 6) {
             return true;
         }
         return false;
     },
 
-    validateColours: function(colour) {
+    validateColours: (colour) => {
         switch (colour.type) {
             case "rgb":
                 return helper.validateRgb(colour.rgb);
@@ -104,24 +104,23 @@ var helper = {
         }
     },
 
-    trimRgb: function(colour) {
-        var tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+    trimRgb: (colour) => {
+        let tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+        let count = 0;
         if (tmp.substring(0, 1) === " ") {
             tmp = tmp.substring(1);
         }
-        /*
-        * Needs to validate and set max on rgb value
-        **/
-        
-        // if (tmp.length >= 10) {
-        //     return tmp.substring(0, 9);
-        // } else {
+        count = JSON.stringify(colour).replace(/,/g, "").length;
+
+        if (count >= 10) {
+            return tmp.substring(0, 9);
+        } else {
             return tmp;
-        // }
+        }
     },
 
-    trimHex: function(colour) {
-        var tmp = JSON.stringify(colour).replace(/[^a-fA-F0-9\s]/g, "");
+    trimHex: (colour) => {
+        let tmp = JSON.stringify(colour).replace(/[^a-fA-F0-9\s]/g, "");
         if (tmp.substring(0, 1) === "#") {
             tmp = tmp.substring(1);
         }
@@ -132,7 +131,7 @@ var helper = {
         }
     },
 
-    convertColours: function(data) {
+    convertColours: (data) => {
         switch(data.type) {
             case 'rgb':
                 return convertRgb(data);
