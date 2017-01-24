@@ -109,12 +109,15 @@ var helper = {
         if (tmp.substring(0, 1) === " ") {
             tmp = tmp.substring(1);
         }
-        console.log("tmp : ", tmp);
-        if (tmp.length >= 10) {
-            return tmp.substring(0, 9);
-        } else {
+        /*
+        * Needs to validate and set max on rgb value
+        **/
+        
+        // if (tmp.length >= 10) {
+        //     return tmp.substring(0, 9);
+        // } else {
             return tmp;
-        }
+        // }
     },
 
     trimHex: function(colour) {
