@@ -16,6 +16,7 @@ Working project: http://lmcjt.com/kulor
 - TinyColour (https://github.com/bgrins/TinyColor)
 
 ### Pipeline
+- Tooltips for hints on use
 - Add alpha
 - Ability to lighten and darken
 - Randomisation
