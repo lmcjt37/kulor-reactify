@@ -2,9 +2,12 @@ import React from 'react';
 import Main from './theme/main.scss';
 import ColourHelper from './helper/colourHelper.js';
 
-import Inputs from './components/Input.js';
+import Inputs from './containers/Input.js';
 import Sliders from './components/Slider.js';
-import Header from './components/Header.js';
+import Header from './containers/Header.js';
+import config from './config';
+const themedInputLight = require('./theme/themedInputLight.scss');
+import themedInputDark from './theme/themedInputDark.scss';
 
 class App extends React.Component {
     constructor(props) {
@@ -19,6 +22,13 @@ class App extends React.Component {
             theme: "light",
             bgColour: "5B3256"
         };
+    }
+
+    getThemedInput(theme) {
+        if (theme === 'light') {
+            return themedInputLight;
+        }
+        return themedInputDark;
     }
 
     handleFocusOfOtherElement = (name) => {
@@ -39,11 +49,19 @@ class App extends React.Component {
     }
 
     render() {
+        const {header:{anchor, image}} = config;
+        const {fullPage: fullPageClasses, header: headerClasses} = Main;
+        const {rgb, hex, theme} = this.state;
+        const inputTheme = this.getThemedInput(theme);
+
         return (
             <div className={Main.fullPage} style={{backgroundColor: "#" + this.state.bgColour }}>
-                <Header />
+                <Header
+                  {...{anchor, image, headerClasses}}/>
                 <div className={Main.centerControls}>
-                    <Inputs {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
+                    <Inputs
+                      {...{rgb, hex, theme, inputTheme}}
+                      onStateChange={this.handleStateChange.bind(this)}/>
                     <Sliders {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
                 </div>
             </div>
