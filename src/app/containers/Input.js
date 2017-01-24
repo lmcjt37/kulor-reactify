@@ -1,6 +1,5 @@
 import React from 'react';
-import Input from 'react-toolbox/lib/input';
-
+import Input from '../components/FormInput';
 import ColourHelper from '../helper/colourHelper.js';
 
 import themedInputLight from '../theme/themedInputLight.scss';
@@ -12,17 +11,18 @@ class Inputs extends React.Component {
   }
 
   handleFocus = (name) => {
-      var elements = document.querySelectorAll('[data-ref=' + name + ']')[0].getElementsByTagName("p");
-      for(var i = 0; i < elements.length; i++) {
+      const elements = document.querySelectorAll('[data-ref=' + name + ']')[0].getElementsByTagName("p");
+      for(let i in elements) {
               elements[i].style.opacity = 1;
       }
   };
 
   handleBlur = (name) => {
-      var collection = document.querySelectorAll('[data-ref=' + name + ']')[0];
-      var paragraphs = collection.getElementsByTagName("p");
-      var input = collection.getElementsByTagName("Input");
-      for(var i = 0; i < paragraphs.length; i++) {
+      const collection = document.querySelectorAll('[data-ref=' + name + ']')[0];
+      const paragraphs = collection.getElementsByTagName("p");
+      const input = collection.getElementsByTagName("Input");
+
+      for (let i in paragraphs) {
             if (input[0].value && input[0].value.length <= 0 || input[0].value === "") {
                 paragraphs[i].style.opacity = 0;
             }
@@ -30,30 +30,39 @@ class Inputs extends React.Component {
   };
 
   handleChange = (name, value) => {
+      const trimType = `trim${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+
       this.props.onStateChange({
-          [name]: (name === "rgb") ? ColourHelper.trimRgb(value) : ColourHelper.trimHex(value),
+          [name]: ColourHelper[trimType](value),
           'type': name
       });
   };
 
   render () {
-      var themedInput;
+
+      let themedInput;
       if (this.props.theme === "dark") {
           themedInput = themedInputDark;
       } else {
           themedInput = themedInputLight;
       }
+
+      const Inputs = ["rgb", "hex"].map(type => (
+          <Input
+            key={type}
+            type='text'
+            label={type.toUpperCase()}
+            name={type}
+            value={this.props[type]}
+            onFocus={this.handleFocus.bind(this, type)}
+            onBlur={this.handleBlur.bind(this, type)}
+            onChange={this.handleChange.bind(this, type)}
+            theme={themedInput} />
+      ));
+
       return (
           <section className={themedInput.wrapper} >
-            <div className={themedInput.rgbWrapper} data-ref="rgb" >
-                <p className={themedInput.inputPrefix} >rgb(</p>
-                <Input type='text' label='RGB' name='rgb' value={this.props.rgb} onFocus={this.handleFocus.bind(this, 'rgb')} onBlur={this.handleBlur.bind(this, 'rgb')} onChange={this.handleChange.bind(this, 'rgb')} theme={themedInput} />
-                <p className={themedInput.inputSuffix} >)</p>
-            </div>
-            <div className={themedInput.hexWrapper} data-ref="hex" >
-                <p className={themedInput.inputPrefix} >#</p>
-                <Input type='text' label='HEX' name='hex' value={this.props.hex} onFocus={this.handleFocus.bind(this, 'hex')} onBlur={this.handleBlur.bind(this, 'hex')} onChange={this.handleChange.bind(this, 'hex')} theme={themedInput} />
-            </div>
+            {Inputs}
           </section>
       );
   }

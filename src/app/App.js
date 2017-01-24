@@ -6,8 +6,6 @@ import Inputs from './containers/Input.js';
 import Sliders from './components/Slider.js';
 import Header from './containers/Header.js';
 import config from './config';
-const themedInputLight = require('./theme/themedInputLight.scss');
-import themedInputDark from './theme/themedInputDark.scss';
 
 class App extends React.Component {
     constructor(props) {
@@ -22,13 +20,6 @@ class App extends React.Component {
             theme: "light",
             bgColour: "5B3256"
         };
-    }
-
-    getThemedInput(theme) {
-        if (theme === 'light') {
-            return themedInputLight;
-        }
-        return themedInputDark;
     }
 
     handleFocusOfOtherElement = (name) => {
@@ -50,17 +41,16 @@ class App extends React.Component {
 
     render() {
         const {header:{anchor, image}} = config;
-        const {fullPage: fullPageClasses, header: headerClasses} = Main;
+        const {fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses} = Main;
         const {rgb, hex, theme} = this.state;
-        const inputTheme = this.getThemedInput(theme);
 
         return (
-            <div className={Main.fullPage} style={{backgroundColor: "#" + this.state.bgColour }}>
+            <div className={fullPageClasses} style={{backgroundColor: "#" + this.state.bgColour }}>
                 <Header
                   {...{anchor, image, headerClasses}}/>
-                <div className={Main.centerControls}>
+                <div className={centerControlsClasses}>
                     <Inputs
-                      {...{rgb, hex, theme, inputTheme}}
+                      {...{rgb, hex, theme}}
                       onStateChange={this.handleStateChange.bind(this)}/>
                     <Sliders {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
                 </div>
