@@ -16,6 +16,7 @@ Working project: http://lmcjt.com/kulor
 - TinyColour (https://github.com/bgrins/TinyColor)
 
 ### Pipeline
+- Restrict input in RGB input field
 - Add alpha
 - Ability to lighten and darken
 - Randomisation
