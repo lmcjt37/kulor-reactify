@@ -10,18 +10,20 @@ const FormInput = ({
   theme,
   onFocus,
   onChange,
-  onBlur
+  onBlur,
+  prefix,
+  suffix
 }) => {
   const {inputPrefix, inputSuffix} = theme;
 
   return (
     <div className={`${name}Wrapper`} data-ref={name}>
       <p className={inputPrefix}>
-          {label}(
+          {`${label}${prefix}`}
       </p>
       <Input
-          {...{type, label, name, value, onFocus, onChange, onBlur}} />
-      <p className={inputSuffix}>)</p>
+          {...{type, label, name, value, onFocus, onChange, onBlur, theme}} />
+      <p className={inputSuffix}>{suffix}</p>
     </div>
   );
 };
