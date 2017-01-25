@@ -3,7 +3,7 @@ import Main from './theme/main.scss';
 import ColourHelper from './helper/colourHelper.js';
 
 import Inputs from './containers/Input.js';
-import Sliders from './components/Slider.js';
+import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
 import config from './config';
 

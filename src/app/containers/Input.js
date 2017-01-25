@@ -42,7 +42,8 @@ class Inputs extends React.Component {
             prefix: '#',
             suffix: ''
         }
-    }
+    };
+
     return ["rgb", "hex"].map(type => {
 
       const {[type]: {prefix = null, suffix = null}} = typeDecoration;
