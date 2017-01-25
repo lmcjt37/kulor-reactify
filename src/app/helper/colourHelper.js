@@ -106,14 +106,51 @@ helper = {
     trimRgb: (colour) => {
         let tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
         let count = 0;
+        // prevents extra commas
         if (tmp.substring(11, 12) === ",") {
             tmp = tmp.substring(0, 11);
         }
+        // trims space (if exists) from conversion
         if (tmp.substring(0, 1) === " ") {
             tmp = tmp.substring(1);
         }
+        // strips commas to get raw count
         count = tmp.replace(/,/g, "").length;
 
+        // catches sets which are pasted in
+        // if (count > 2 && tmp.indexOf(",") < 0) {
+        //     switch(tmp.length) {
+        //         case 9:
+        //             tmp = [tmp.slice(0,3),",",tmp.slice(3,6),",",tmp.slice(6)].join("");
+        //             break;
+        //         case 6:
+        //             tmp = [tmp.slice(0,3),",",tmp.slice(3),","].join("");
+        //             break;
+        //         case 3:
+        //             tmp = tmp + ",";
+        //             break;
+        //     }
+        // }
+
+        // adds missing commas dynamically
+        let arr = tmp.split("");
+        let commaCount = 0;
+        let inc = 0;
+        arr.forEach((chr, idx) => {
+            inc++;
+            if (commaCount !== 2) {
+                if (chr === ",") {
+                    commaCount++;
+                    inc = 0;
+                }
+                if (inc === 3 && chr !== ",") {
+                    tmp = [tmp.slice(0,idx+1),",",tmp.slice(idx+1)].join("");
+                    inc = 0;
+                }
+            }
+        });
+
+        // sets limit to 11 with commas
         if (count >= 10) {
             return tmp.substring(0, 11);
         } else {

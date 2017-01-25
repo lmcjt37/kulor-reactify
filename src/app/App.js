@@ -10,8 +10,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rgb: '',
-            hex: '',
+            rgb: '91,50,86',
+            hex: '5B3256',
             hue: 0,
             saturation: 0,
             lightness: 0,
