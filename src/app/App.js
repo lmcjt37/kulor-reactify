@@ -10,24 +10,22 @@ import config from './config';
 class App extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             rgb: '',
             hex: '',
             hue: 0,
             saturation: 0,
             lightness: 0,
-            type: "",
-            theme: "light",
-            bgColour: "5B3256"
+            type: '',
+            theme: 'light',
+            bgColour: '5B3256'
         };
     }
 
     handleFocusOfOtherElement = (name) => {
-        var otherEl = (name === "rgb") ? "hex" : "rgb";
-        var elements = document.querySelectorAll('[data-ref=' + otherEl + ']')[0].getElementsByTagName("p");
-        for(var i = 0; i < elements.length; i++) {
-                elements[i].style.opacity = 1;
-        }
+        document.querySelectorAll(`[data-ref=${["hex", "rgb"].find(type => type !== name)}] p`)
+          .forEach(p => p.style.opacity = 1);
     }
 
     handleStateChange = (data) => {
@@ -45,7 +43,7 @@ class App extends React.Component {
         const {rgb, hex, theme} = this.state;
 
         return (
-            <div className={fullPageClasses} style={{backgroundColor: "#" + this.state.bgColour }}>
+            <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
                 <Header
                   {...{anchor, image, headerClasses}}/>
                 <div className={centerControlsClasses}>
@@ -55,7 +53,7 @@ class App extends React.Component {
                     <Sliders {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
                 </div>
             </div>
-        )
+        );
     }
 };
 
