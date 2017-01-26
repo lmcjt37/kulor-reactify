@@ -40,17 +40,21 @@ class App extends React.Component {
     render() {
         const {header:{anchor, image}} = config;
         const {fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses} = Main;
-        const {rgb, hex, theme} = this.state;
+        const {rgb, hex, theme, hue, saturation, lightness} = this.state;
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
                 <Header
-                  {...{anchor, image, headerClasses}}/>
+                  {...{anchor, image, headerClasses}} />
+
                 <div className={centerControlsClasses}>
                     <Inputs
                       {...{rgb, hex, theme}}
-                      onStateChange={this.handleStateChange.bind(this)}/>
-                    <Sliders {...this.state} onStateChange={this.handleStateChange.bind(this)}/>
+                      onStateChange={this.handleStateChange} />
+
+                    <Sliders
+                      {...{rgb, hex, theme, hue, saturation, lightness}}
+                      onStateChange={this.handleStateChange} />
                 </div>
             </div>
         );

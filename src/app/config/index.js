@@ -1,7 +1,7 @@
 import header from './header';
 
 const appConfig =  {
-  header
+    header
 };
 
 
