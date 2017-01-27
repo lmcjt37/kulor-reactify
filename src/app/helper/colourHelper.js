@@ -90,17 +90,14 @@ var helper = {
         return false;
     },
 
-    validateColours: function(colour) {
-        switch (colour.type) {
+    validateColours({type, rgb, hex}) {
+        switch (type) {
             case "rgb":
-                return helper.validateRgb(colour.rgb);
-                break;
+                return helper.validateRgb(rgb);
             case "hex":
-                return helper.validateHex(colour.hex);
-                break;
+                return helper.validateHex(hex);
             default:
-                // hsl values will default
-                return true;
+                return false;
         }
     },
 

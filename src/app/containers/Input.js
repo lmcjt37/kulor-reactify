@@ -8,28 +8,37 @@ import themedInputDark from '../theme/themedInputDark.scss';
 class Inputs extends React.Component {
 
     constructor(props) {
-      super(props);
+        super(props);
     }
 
-    handleFocus(name) {
-        document.querySelectorAll(`[data-ref=${name}] p`).forEach(p => p.style.opacity = 1);
+    handleFocus(type) {
+        this.props.onStateChange({
+          [`${type}Opacity`] : 1
+        });
+
     }
 
-    handleBlur(name) {
-        const inputWrapper = `[data-ref=${name}]`;
-        document.querySelectorAll(`input[name=${name}]`).forEach(input => {
-            if (input.value === '' || input.value.length === 0 || input.value < 0) {
-                document.querySelectorAll(`${inputWrapper} p`).forEach(p => p.style.opacity = 0);
-            }
+    handleBlur(type) {
+        const {value, name} = this[`${type}`];
+
+        if (value !== '' || value.length !== 0 || value > 0) {
+          this.props.onStateChange({
+            [`${name}Opacity`] : 1
+          });
+          return;
+        }
+        this.props.onStateChange({
+            [`${name}Opacity`] : 0
         });
     }
 
-    handleChange(name, value) {
+    handleChange(type) {
+        const {value, name} = this[`${type}`];
         const trimType = `trim${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 
         this.props.onStateChange({
-            [name]: ColourHelper[trimType](value),
-            'type': name
+          [name]: ColourHelper[trimType](value),
+          'type': name
         });
     }
 
@@ -56,10 +65,11 @@ class Inputs extends React.Component {
                 label={type.toUpperCase()}
                 name={type}
                 value={this.props[type]}
-                onFocus={this.handleFocus.bind(this, type)}
-                onBlur={this.handleBlur.bind(this, type)}
-                onChange={this.handleChange.bind(this, type)}
+                onFocus={() => this.handleFocus(type)}
+                onBlur={() => this.handleBlur(type)}
+                onChange={() => this.handleChange(type)}
                 theme={this.getInputTheme(this.props.theme)}
+                opacity={this.props[`${type}Opacity`]}
                 {...{prefix, suffix}} />
             )
           });
@@ -70,6 +80,10 @@ class Inputs extends React.Component {
             return themedInputDark;
         }
         return themedInputLight;
+    }
+
+    componentDidMount() {
+        document.querySelectorAll('input').forEach(input => this[`${input.name}`] = input);
     }
 
     render () {

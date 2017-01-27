@@ -32,22 +32,13 @@ class Sliders extends React.Component {
     getColourSliders(sliderTheme) {
         return [
           {
-            type: 'hue',
-            min: 0,
-            max: 360,
-            step: 1
+            type: 'hue', min: 0, max: 360, step: 1
           },
           {
-            type: 'saturation',
-            min: 0,
-            max: 100,
-            step: 1
+            type: 'saturation', min: 0, max: 100, step: 1
           },
           {
-            type: 'lightness',
-            min: 0,
-            max: 360,
-            step: 1
+            type: 'lightness', min: 0, max: 360, step: 1
           }
         ].map(({type, min, max, step}) => (
             <Slider
@@ -57,8 +48,7 @@ class Sliders extends React.Component {
               label={`${type.charAt(0).toUpperCase()}${type.slice(1)}`}
               value={this.props[type]}
               onChange={this.handleChange.bind(this, type)}
-              theme={sliderTheme}
-            />
+              theme={sliderTheme} />
         ));
     }
 
@@ -67,7 +57,7 @@ class Sliders extends React.Component {
 
         return (
               <section className={sliderTheme['wrapper']}>
-                 {this.getColourSliders(this.getSliderTheme(sliderTheme))}
+                 {this.getColourSliders(sliderTheme)}
               </section>
         );
     }

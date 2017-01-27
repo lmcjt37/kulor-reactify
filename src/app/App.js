@@ -15,6 +15,8 @@ class App extends React.Component {
             rgb: '',
             hex: '',
             hue: 0,
+            rgbOpacity: 0,
+            hexOpacity: 0,
             saturation: 0,
             lightness: 0,
             type: '',
@@ -23,24 +25,23 @@ class App extends React.Component {
         };
     }
 
-    handleFocusOfOtherElement = (name) => {
-        document.querySelectorAll(`[data-ref=${["hex", "rgb"].find(type => type !== name)}] p`)
-          .forEach(p => p.style.opacity = 1);
-    }
 
     handleStateChange = (data) => {
         if (ColourHelper.validateColours(data)) {
-            this.setState(ColourHelper.convertColours(data));
-            this.handleFocusOfOtherElement(data.type);
+            this.setState({
+                ...ColourHelper.convertColours(data)
+            });
         } else {
-            this.setState(data);
+            this.setState({
+              ...data
+            });
         }
     }
 
     render() {
         const {header:{anchor, image}} = config;
         const {fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses} = Main;
-        const {rgb, hex, theme, hue, saturation, lightness} = this.state;
+        const {rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness} = this.state;
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
@@ -49,7 +50,7 @@ class App extends React.Component {
 
                 <div className={centerControlsClasses}>
                     <Inputs
-                      {...{rgb, hex, theme}}
+                      {...{rgb, hex, theme, hexOpacity, rgbOpacity}}
                       onStateChange={this.handleStateChange} />
 
                     <Sliders
