@@ -12,8 +12,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            rgb: '',
-            hex: '',
+            rgb: '91,50,86',
+            hex: '5B3256',
             hue: 0,
             rgbOpacity: 0,
             hexOpacity: 0,

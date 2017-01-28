@@ -13,7 +13,7 @@ app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
   silent: false,
-  stats: { color: true }
+  stats: { colors: true }
 }));
 
 app.use(webpackHotMiddleware(compiler));
