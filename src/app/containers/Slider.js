@@ -4,7 +4,7 @@ import Slider from '../components/FormSlider';
 import themedSliderLight from '../theme/themedSliderLight.scss';
 import themedSliderDark from '../theme/themedSliderDark.scss';
 
-class Sliders extends React.Component {
+export default class Sliders extends React.Component {
 
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ class Sliders extends React.Component {
             type: 'saturation', min: 0, max: 100, step: 1
           },
           {
-            type: 'lightness', min: 0, max: 360, step: 1
+            type: 'lightness', min: 0, max: 100, step: 1
           }
         ].map(({type, min, max, step}) => (
             <Slider
@@ -62,5 +62,3 @@ class Sliders extends React.Component {
         );
     }
 }
-
-export default Sliders;

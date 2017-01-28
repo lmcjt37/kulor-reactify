@@ -5,7 +5,7 @@ import ColourHelper from '../helper/colourHelper.js';
 import themedInputLight from '../theme/themedInputLight.scss';
 import themedInputDark from '../theme/themedInputDark.scss';
 
-class Inputs extends React.Component {
+export default class Inputs extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class Inputs extends React.Component {
 
     handleFocus(type) {
         this.props.onStateChange({
-          [`${type}Opacity`] : 1
+            [`${type}Opacity`] : 1
         });
 
     }
@@ -21,15 +21,11 @@ class Inputs extends React.Component {
     handleBlur(type) {
         const {value, name} = this[`${type}`];
 
-        if (value !== '' || value.length !== 0 || value > 0) {
+        if (value === '' || value.length === 0 || value < 0) {
           this.props.onStateChange({
-            [`${name}Opacity`] : 1
+              [`${name}Opacity`] : 1
           });
-          return;
         }
-        this.props.onStateChange({
-            [`${name}Opacity`] : 0
-        });
     }
 
     handleChange(type) {
@@ -37,42 +33,42 @@ class Inputs extends React.Component {
         const trimType = `trim${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 
         this.props.onStateChange({
-          [name]: ColourHelper[trimType](value),
-          'type': name
+            [name]: ColourHelper[trimType](value),
+            'type': name
         });
     }
 
     getColourInputs() {
-          const typeDecoration = {
-              rgb: {
-                  prefix: '(',
-                  suffix: ')'
-              },
-              hex: {
-                  prefix: '#',
-                  suffix: ''
-              }
-          };
+        const typeDecoration = {
+            rgb: {
+                prefix: '(',
+                suffix: ')'
+            },
+            hex: {
+                prefix: '#',
+                suffix: ''
+            }
+        };
 
-          return ["rgb", "hex"].map(type => {
+        return ["rgb", "hex"].map(type => {
 
             const {[type]: {prefix = null, suffix = null}} = typeDecoration;
 
             return (
-              <Input
-                key={type}
-                type='text'
-                label={type.toUpperCase()}
-                name={type}
-                value={this.props[type]}
-                onFocus={() => this.handleFocus(type)}
-                onBlur={() => this.handleBlur(type)}
-                onChange={() => this.handleChange(type)}
-                theme={this.getInputTheme(this.props.theme)}
-                opacity={this.props[`${type}Opacity`]}
-                {...{prefix, suffix}} />
-            )
-          });
+                <Input
+                  key={type}
+                  type='text'
+                  label={type.toUpperCase()}
+                  name={type}
+                  value={this.props[type]}
+                  onFocus={() => this.handleFocus(type)}
+                  onBlur={() => this.handleBlur(type)}
+                  onChange={() => this.handleChange(type)}
+                  theme={this.getInputTheme(this.props.theme)}
+                  opacity={this.props[`${type}Opacity`]}
+                  {...{prefix, suffix}} />
+            );
+        });
     }
 
     getInputTheme(theme) {
@@ -87,12 +83,10 @@ class Inputs extends React.Component {
     }
 
     render () {
-        return (
+      return (
             <section className={this.getInputTheme(this.props.theme)['wrapper']} >
-              {this.getColourInputs()}
+                {this.getColourInputs()}
             </section>
         );
     }
 }
-
-export default Inputs;

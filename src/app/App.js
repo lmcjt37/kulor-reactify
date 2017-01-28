@@ -7,7 +7,7 @@ import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
 import config from './config';
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
 
@@ -27,13 +27,19 @@ class App extends React.Component {
 
 
     handleStateChange = (data) => {
+        const {rgbOpacity = this.state.rgbOpacity, hexOpacity =this.state.hexOpacity} = data;
+
         if (ColourHelper.validateColours(data)) {
             this.setState({
-                ...ColourHelper.convertColours(data)
+                ...ColourHelper.convertColours(data),
+                rgbOpacity,
+                hexOpacity
             });
         } else {
             this.setState({
-              ...data
+              ...data,
+              rgbOpacity,
+              hexOpacity
             });
         }
     }
@@ -45,8 +51,7 @@ class App extends React.Component {
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
-                <Header
-                  {...{anchor, image, headerClasses}} />
+                <Header {...{anchor, image, headerClasses}} />
 
                 <div className={centerControlsClasses}>
                     <Inputs
@@ -60,6 +65,6 @@ class App extends React.Component {
             </div>
         );
     }
-};
+}
 
-export default App;
+
