@@ -1,5 +1,4 @@
-var tinycolor = require("tinycolor2"),
-    helper;
+const tinycolor = require("tinycolor2");
 
 function parseRgb(rgb, type) {
     switch(type) {
@@ -16,10 +15,8 @@ function parseRgb(rgb, type) {
                 g: tmp[1],
                 b: tmp[2]
             };
-            break;
         case "string":
             return rgb.r + "," + rgb.g + "," + rgb.b;
-            break;
     }
 };
 
@@ -77,13 +74,13 @@ function convertHsl(data) {
     };
 };
 
-var helper = {
+const helper = {
 
-    validateRgb: function(rgb) {
+    validateRgb(rgb) {
         return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
     },
 
-    validateHex: function(hex) {
+    validateHex(hex) {
         if (hex.length === 3 || hex.length === 6) {
             return true;
         }
@@ -97,11 +94,11 @@ var helper = {
             case "hex":
                 return helper.validateHex(hex);
             default:
-                return false;
+                return true;
         }
     },
 
-    trimRgb: function(colour) {
+    trimRgb(colour) {
         var tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
         if (tmp.substring(0, 1) === " ") {
             return tmp.substring(1);
@@ -110,23 +107,20 @@ var helper = {
         }
     },
 
-    trimHex: function(colour) {
+    trimHex(colour) {
         return JSON.stringify(colour).replace(/[^a-f0-9\s]/g, "");
     },
 
-    convertColours: function(data) {
+    convertColours(data) {
         switch(data.type) {
             case 'rgb':
                 return convertRgb(data);
-                break;
             case 'hex':
                 return convertHex(data);
-                break;
             case 'hue':
             case 'saturation':
             case 'lightness':
                 return convertHsl(data);
-                break;
         }
     }
 
