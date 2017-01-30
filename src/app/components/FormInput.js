@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
 
-export default  ({
+export default ({
     type = 'text',
     label,
     value,
@@ -19,7 +19,7 @@ export default  ({
     return (
         <div className={`${name}Wrapper`} data-ref={name}>
             <p className={inputPrefix} style={{opacity: opacity}}>
-                {`${label}${prefix}`}
+                {`${ label === 'RGB' ? label.toLowerCase() : '' }${prefix}`}
             </p>
             <Input
                 {...{type, label, name, value, onFocus, onChange, onBlur, theme}} />
@@ -27,5 +27,3 @@ export default  ({
         </div>
     );
 };
-
-

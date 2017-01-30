@@ -11,10 +11,10 @@ export default ({
     onChange,
     theme
 }) => (
-    <p className={theme['sliderLabel']} >
-        {label}
-
-        <Slider
-            {...{max, min, step, editable, value, onChange, theme}} />
-    </p>
+    <div>
+        <p className={theme['sliderLabel']} >
+            {label}
+        </p>
+        <Slider {...{max, min, step, editable, value, onChange, theme}} />
+    </div>
 );

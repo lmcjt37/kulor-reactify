@@ -15,8 +15,8 @@ export default class App extends React.Component {
             rgb: '91,50,86',
             hex: '5B3256',
             hue: 0,
-            rgbOpacity: 0,
-            hexOpacity: 0,
+            rgbOpacity: 1,
+            hexOpacity: 1,
             saturation: 0,
             lightness: 0,
             type: '',
@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
 
     handleStateChange = (data) => {
-        const {rgbOpacity = this.state.rgbOpacity, hexOpacity =this.state.hexOpacity} = data;
+        const {rgbOpacity = this.state.rgbOpacity, hexOpacity = this.state.hexOpacity} = data;
 
         if (ColourHelper.validateColours(data)) {
             this.setState({
@@ -66,5 +66,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-

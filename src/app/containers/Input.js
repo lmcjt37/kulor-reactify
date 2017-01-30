@@ -23,9 +23,9 @@ export default class Inputs extends React.Component {
 
         if (value === '' || value.length === 0 || value < 0) {
           this.props.onStateChange({
-              [`${name}Opacity`] : 1
+              [`${name}Opacity`] : 0
           });
-        }
+      }
     }
 
     handleChange(type) {
