@@ -15,10 +15,8 @@ let parseRgb = (rgb, type) => {
                 g: tmp[1],
                 b: tmp[2]
             };
-            break;
         case "string":
             return rgb.r + "," + rgb.g + "," + rgb.b;
-            break;
     }
 };
 
@@ -89,16 +87,13 @@ helper = {
         return false;
     },
 
-    validateColours: (colour) => {
-        switch (colour.type) {
+    validateColours({type, rgb, hex}) {
+        switch (type) {
             case "rgb":
-                return helper.validateRgb(colour.rgb);
-                break;
+                return helper.validateRgb(rgb);
             case "hex":
-                return helper.validateHex(colour.hex);
-                break;
+                return helper.validateHex(hex);
             default:
-                // hsl values will default
                 return true;
         }
     },
@@ -159,15 +154,12 @@ helper = {
         switch(data.type) {
             case 'rgb':
                 return convertRgb(data);
-                break;
             case 'hex':
                 return convertHex(data);
-                break;
             case 'hue':
             case 'saturation':
             case 'lightness':
                 return convertHsl(data);
-                break;
         }
     }
 
