@@ -6,6 +6,7 @@
     "name": "Luke Taylor",
     "url": "http://lmcjt.com"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-toolbox/react-toolbox-example.git"
@@ -44,11 +45,9 @@
     "node-sass": "~3.8.0",
     "normalize.css": "~4.2.0",
     "postcss-loader": "~0.10.1",
-    "react": "^15.4.2",
     "react-addons-css-transition-group": "~15.3.0",
     "react-addons-test-utils": "^15.4.2",
     "react-addons-update": "~15.3.0",
-    "react-dom": "^15.4.2",
     "react-toolbox": "~1.1.2",
     "react-transform-catch-errors": "~1.0.0",
     "react-transform-hmr": "^1.0.4",
@@ -66,11 +65,12 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha -r test/setup.js --recursive test/spec"
+    "test": "mocha test/setup.js test/spec/**/*.spec.js --reporter dot"
   },
-  "license": "MIT",
   "dependencies": {
     "react-css-themr": "^1.6.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
