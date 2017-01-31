@@ -1,19 +1,22 @@
 
 import React from 'react';
+import {
+	findRenderedDOMComponentWithTag
+} from 'react-addons-test-utils';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { shallow, mount, render } from 'enzyme';
 
 import App from '../../src/app/App.js';
 
 describe("Tests for app.js", function() {
 
-  it("checks correct setup of initial page", function() {
-      const wrapper = shallow(<App />);
+    it("checks correct setup of initial page", function() {
+        const component = shallow(<App />);
 
-      expect(wrapper.find('Header')).to.have.length(1);
-      expect(wrapper.find('Inputs')).to.have.length(1);
-      expect(wrapper.find('Sliders')).to.have.length(1);
+        expect(findRenderedDOMComponentWithTag(component, 'Header')).to.be.ok;
+        expect(findRenderedDOMComponentWithTag(component, 'Inputs')).to.be.ok;
+        expect(findRenderedDOMComponentWithTag(component, 'Sliders')).to.be.ok;
 
-  });
+    });
 
 });
