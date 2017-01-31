@@ -39,6 +39,7 @@
     "eslint-plugin-react": "~6.1.2",
     "express": "~4.13.3",
     "extract-text-webpack-plugin": "~1.0.1",
+    "ignore-styles": "^5.0.1",
     "internal-ip": "~1.2.0",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
@@ -65,7 +66,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha test/setup.js test/spec/**/*.spec.js --reporter dot"
+    "test": "mocha test/.setup.js test/**/*.spec.js -R nyan -r ignore-styles"
   },
   "dependencies": {
     "react-css-themr": "^1.6.0",
