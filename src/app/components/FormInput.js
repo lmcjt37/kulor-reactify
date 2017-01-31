@@ -14,10 +14,10 @@ export default ({
     prefix,
     suffix
 }) => {
-    const {inputPrefix, inputSuffix} = theme;
+    const {inputPrefix, inputSuffix, inputWrapper} = theme;
 
     return (
-        <div className={`${name}Wrapper`} data-ref={name}>
+        <div className={inputWrapper} data-ref={name}>
             <p className={inputPrefix} style={{opacity: opacity}}>
                 {`${ label === 'RGB' ? label.toLowerCase() : '' }${prefix}`}
             </p>
