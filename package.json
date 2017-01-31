@@ -66,7 +66,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha -w test/setup.js test/**/*.spec.js"
+    "test": "mocha -r test/setup.js --recursive test/spec"
   },
   "license": "MIT",
   "dependencies": {
