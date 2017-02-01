@@ -14,8 +14,7 @@ describe("Tests for app.js",() => {
 
         expect(wrapper.type()).to.equal('div');
 
-        // assertion incorrect ???
-        // expect(wrapper.prop('style')).to.equal({ backgroundColor: '#5B3256' });
+        expect(wrapper.prop('style')).to.deep.equal({ backgroundColor: '#5B3256' });
 
     });
 
