@@ -46,7 +46,6 @@
     "node-sass": "~3.8.0",
     "normalize.css": "~4.2.0",
     "postcss-loader": "~0.10.1",
-    "proxyquire": "^1.7.11",
     "react-addons-css-transition-group": "~15.3.0",
     "react-addons-test-utils": "^15.4.2",
     "react-addons-update": "~15.3.0",

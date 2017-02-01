@@ -2,24 +2,25 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import proxyquire from 'proxyquire';
-proxyquire.noCallThru();
 
 const MainSpy = sinon.spy(),
     ColourHelperSpy = sinon.spy(),
     InputsSpy = sinon.spy(),
     SlidersSpy = sinon.spy(),
     HeaderSpy = sinon.spy(),
-    configSpy = sinon.stub().returns({anchor: {}, image: {}});
+    configSpy = sinon.stub().returns({
+        anchor: {},
+        image: {}
+    });
 
-const App = proxyquire('../../src/app/App.js', {
-    './theme/main.scss': MainSpy,
-    './helper/colourHelper.js': ColourHelperSpy,
-    './containers/Input.js': InputsSpy,
-    './containers/Slider.js': SlidersSpy,
-    './containers/Header.js': HeaderSpy,
-    './config': configSpy
-}).default;
+// const App = proxyquire('../../src/app/App.js', {
+//     './theme/main.scss': MainSpy,
+//     './helper/colourHelper.js': ColourHelperSpy,
+//     './containers/Input.js': InputsSpy,
+//     './containers/Slider.js': SlidersSpy,
+//     './containers/Header.js': HeaderSpy,
+//     './config': configSpy
+// }).default;
 
 describe("Tests for app.js", function() {
 
