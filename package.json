@@ -66,7 +66,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha test/setup.js test/**/*.spec.js -R nyan -r ignore-styles"
+    "test": "mocha test/**/*.spec.js -r test/setup.js -r ignore-styles -R nyan"
   },
   "dependencies": {
     "react-css-themr": "^1.6.0",
