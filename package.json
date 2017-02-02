@@ -30,6 +30,7 @@
     "babel-preset-stage-0": "^6.18.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "classnames": "~2.2.1",
     "cross-env": "~2.0.0",
     "css-loader": "~0.23.1",
@@ -46,9 +47,12 @@
     "node-sass": "~3.8.0",
     "normalize.css": "~4.2.0",
     "postcss-loader": "~0.10.1",
+    "react": "^15.4.2",
     "react-addons-css-transition-group": "~15.3.0",
     "react-addons-test-utils": "^15.4.2",
     "react-addons-update": "~15.3.0",
+    "react-css-themr": "^1.6.0",
+    "react-dom": "^15.4.2",
     "react-toolbox": "~1.1.2",
     "react-transform-catch-errors": "~1.0.0",
     "react-transform-hmr": "^1.0.4",
@@ -57,6 +61,7 @@
     "sass-loader": "~4.0.0",
     "sinon": "^1.17.7",
     "style-loader": "~0.13.1",
+    "tinycolor2": "^1.4.1",
     "webpack": "~1.13.2",
     "webpack-config-utils": "^2.3.0",
     "webpack-dev-middleware": "~1.6.1",
@@ -67,12 +72,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha test/**/*.spec.js -r test/setup.js -r ignore-styles -R nyan"
+    "test": "mocha test/**/*.spec.js -r test/setup.js -r babel-register -r ignore-styles -R nyan"
   },
-  "dependencies": {
-    "react-css-themr": "^1.6.0",
-    "tinycolor2": "^1.4.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
-  }
+  "dependencies": {}
 }
