@@ -22,3 +22,9 @@ global.navigator = {
 };
 
 documentRef = document;
+
+global.chai = require('chai');
+global.chai.use(require('chai-as-promised'));
+global.should = chai.should();
+global.expect = chai.expect;
+global.assert = chai.assert;
