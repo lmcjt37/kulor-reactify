@@ -16,12 +16,12 @@ $break-medium: 767px;
     height: 50%;
     width: 50%;
     @media screen and (max-width: $break-medium) {
-        padding-top: 18%;
+        padding-top: 22%;
         width: 80%;
     }
     @media screen and (max-width: $break-small) {
-        padding-top: 22%;
-        width: 90%;
+        padding-top: 30%;
+        width: 85%;
     }
 }
 
