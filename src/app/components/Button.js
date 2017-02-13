@@ -3,7 +3,8 @@ import {Button, IconButton} from 'react-toolbox/lib/button';
 
 export default ({
     icon,
-    label
+    label,
+    onMouseUp
 }) => (
-    <Button icon={icon} label={label} raised primary />
+    <Button {...{icon, label, onMouseUp}} raised primary />
 );

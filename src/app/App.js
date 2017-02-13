@@ -64,7 +64,8 @@ export default class App extends React.Component {
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                <ButtonBar {...{ random, buttonBarClasses }} />
+                <ButtonBar {...{ random, buttonBarClasses }}
+                    onStateChange={this.handleStateChange} />
             </div>
         );
     }

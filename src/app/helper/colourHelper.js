@@ -94,7 +94,7 @@ helper = {
             case "hex":
                 return helper.validateHex(hex);
             default:
-                return true;
+                return false;
         }
     },
 
@@ -161,6 +161,19 @@ helper = {
             case 'lightness':
                 return convertHsl(data);
         }
+    },
+
+    randomise: () => {
+        var color = tinycolor.random();
+        return {
+            "rgb": parseRgb(color.toRgb(), "string"),
+            "hex": color.toHex(),
+            "hue": parseDecimal(color.toHsl()["h"]),
+            "saturation": parseDecimal(color.toHsl()["s"]),
+            "lightness": parseDecimal(color.toHsl()["l"]),
+            "theme": color.isDark() ? "light" : "dark",
+            "bgColour": color.toHex()
+        };
     }
 
 };
