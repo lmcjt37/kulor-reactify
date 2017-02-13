@@ -91,10 +91,20 @@ helper = {
         switch (type) {
             case "rgb":
                 return helper.validateRgb(rgb);
+                break;
             case "hex":
                 return helper.validateHex(hex);
-            default:
+                break;
+            case "hue":
+            case "saturation":
+            case "lightness":
+                /**
+                * no validation - constrained and always returned as String
+                */
                 return true;
+                break;
+            default:
+                return false;
         }
     },
 
@@ -161,6 +171,45 @@ helper = {
             case 'lightness':
                 return convertHsl(data);
         }
+    },
+
+    randomise: () => {
+        var color = tinycolor.random();
+        return {
+            "rgb": parseRgb(color.toRgb(), "string"),
+            "hex": color.toHex(),
+            "hue": parseDecimal(color.toHsl()["h"]),
+            "saturation": parseDecimal(color.toHsl()["s"]),
+            "lightness": parseDecimal(color.toHsl()["l"]),
+            "theme": color.isDark() ? "light" : "dark",
+            "bgColour": color.toHex()
+        };
+    },
+
+    lighten: (hex) => {
+        var color = tinycolor(hex).lighten();
+        return {
+            "rgb": parseRgb(color.toRgb(), "string"),
+            "hex": color.toHex(),
+            "hue": parseDecimal(color.toHsl()["h"]),
+            "saturation": parseDecimal(color.toHsl()["s"]),
+            "lightness": parseDecimal(color.toHsl()["l"]),
+            "theme": color.isDark() ? "light" : "dark",
+            "bgColour": color.toHex()
+        };
+    },
+
+    darken: (hex) => {
+        var color = tinycolor(hex).darken();
+        return {
+            "rgb": parseRgb(color.toRgb(), "string"),
+            "hex": color.toHex(),
+            "hue": parseDecimal(color.toHsl()["h"]),
+            "saturation": parseDecimal(color.toHsl()["s"]),
+            "lightness": parseDecimal(color.toHsl()["l"]),
+            "theme": color.isDark() ? "light" : "dark",
+            "bgColour": color.toHex()
+        };
     }
 
 };
