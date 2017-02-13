@@ -29,7 +29,6 @@ export default class App extends React.Component {
 
     handleStateChange = (data) => {
         const {rgbOpacity = this.state.rgbOpacity, hexOpacity = this.state.hexOpacity} = data;
-
         if (ColourHelper.validateColours(data)) {
             this.setState({
                 ...ColourHelper.convertColours(data),
@@ -46,7 +45,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { header:{ anchor, image }, buttonBar:{ random } } = config;
+        const { header:{ anchor, image }, buttonBar: buttonBar } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
         const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness } = this.state;
 
@@ -64,7 +63,7 @@ export default class App extends React.Component {
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                <ButtonBar {...{ random, buttonBarClasses }}
+                <ButtonBar {...{ hex, buttonBar, buttonBarClasses }}
                     onStateChange={this.handleStateChange} />
             </div>
         );
