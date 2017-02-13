@@ -1,8 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import chaiAsPromised from 'chai-as-promised';
-chai.use(chaiAsPromised);
 import sinon from 'sinon';
 
 import App from '../../src/app/App';
