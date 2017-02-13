@@ -5,6 +5,7 @@ import ColourHelper from './helper/colourHelper.js';
 import Inputs from './containers/Input.js';
 import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
+import ButtonBar from './containers/ButtonBar.js';
 import config from './config';
 
 export default class App extends React.Component {
@@ -45,13 +46,13 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {header:{anchor, image}} = config;
-        const {fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses} = Main;
-        const {rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness} = this.state;
+        const { header:{ anchor, image }, buttonBar:{ random } } = config;
+        const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness } = this.state;
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
-                <Header {...{anchor, image, headerClasses}} />
+                <Header {...{ anchor, image, headerClasses }} />
 
                 <div className={centerControlsClasses}>
                     <Inputs
@@ -62,6 +63,8 @@ export default class App extends React.Component {
                       {...{rgb, hex, theme, hue, saturation, lightness}}
                       onStateChange={this.handleStateChange} />
                 </div>
+
+                <ButtonBar {...{ random, buttonBarClasses }} />
             </div>
         );
     }

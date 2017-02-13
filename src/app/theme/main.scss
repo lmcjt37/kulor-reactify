@@ -10,10 +10,10 @@ $break-medium: 767px;
 }
 
 .centerControls {
+    height: 50%;
     margin: auto;
     padding-top: 8%;
     position: relative;
-    height: 50%;
     width: 50%;
     @media screen and (max-width: $break-medium) {
         padding-top: 18%;
@@ -29,4 +29,19 @@ $break-medium: 767px;
     position: absolute;
     left: 25px;
     top: 25px;
+}
+
+.buttonBar {
+    height: 50%;
+    margin: auto;
+    padding-top: 4%;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    @media screen and (max-width: $break-medium) {
+        width: 80%;
+    }
+    @media screen and (max-width: $break-small) {
+        width: 90%;
+    }
 }
