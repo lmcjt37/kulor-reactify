@@ -5,6 +5,8 @@ This is a colour conversion app that allows you to convert colours between RGB, 
 
 Includes:
 * Randomisation
+* Lighten
+* Darken
 * More to come...
 
 ## Getting Started
@@ -22,7 +24,6 @@ Working project: http://lmcjt.com/kulor
 ### Pipeline
 - Tooltips for hints on use
 - Add alpha
-- Ability to lighten and darken
 - Additional colour modes
 - Ability to get different colour combos (triad/complementary/tetrad)
 - Colour palette for storing colours from the session
