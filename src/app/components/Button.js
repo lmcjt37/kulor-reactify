@@ -4,7 +4,8 @@ import {Button, IconButton} from 'react-toolbox/lib/button';
 export default ({
     icon,
     label,
+    theme,
     onMouseUp
 }) => (
-    <Button {...{icon, label, onMouseUp}} raised primary />
+    <Button {...{icon, label, theme, onMouseUp}} raised primary />
 );
