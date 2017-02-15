@@ -1,3 +1,16 @@
+$break-small: 320px;
+
 .button:not(:first-child) {
-    margin-left: 5px;
+    @media screen and (min-width: $break-small) {
+        margin-left: 5px;
+    }
+    @media screen and (max-width: $break-small) {
+        margin-left: 0px;
+    }
+}
+.button {
+    @media screen and (max-width: $break-small) {
+        margin-top: 5px;
+        width: 100%;
+    }
 }
