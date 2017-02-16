@@ -15,11 +15,11 @@ export default class App extends React.Component {
         this.state = {
             rgb: '91,50,86',
             hex: '5B3256',
-            hue: 0,
+            hue: 307,
             rgbOpacity: 1,
             hexOpacity: 1,
-            saturation: 0,
-            lightness: 0,
+            saturation: 29,
+            lightness: 28,
             type: '',
             theme: 'light',
             bgColour: '5B3256'
