@@ -1,7 +1,7 @@
 const tinycolor = require("tinycolor2");
 let helper = {};
 
-let parseRgb = (rgb, type) => {
+const parseRgb = (rgb, type) => {
     switch(type) {
         case "object":
             let tmp = helper.trimRgb(rgb);
@@ -20,7 +20,7 @@ let parseRgb = (rgb, type) => {
     }
 };
 
-let parseDecimal = (dec) => {
+const parseDecimal = (dec) => {
     if (dec > 1) {
         return Math.round(dec.toFixed(2));
     } else {
@@ -28,7 +28,7 @@ let parseDecimal = (dec) => {
     }
 };
 
-let objectifyHsl = (data) => {
+const objectifyHsl = (data) => {
     return {
         h: data.hue,
         s: data.saturation,
@@ -36,7 +36,7 @@ let objectifyHsl = (data) => {
     };
 };
 
-let convertRgb = (data) => {
+const convertRgb = (data) => {
     let rgb = parseRgb(data.rgb, "object");
     return {
         "rgb": parseRgb(rgb, "string"),
@@ -49,7 +49,7 @@ let convertRgb = (data) => {
     };
 };
 
-let convertHex = (data) => {
+const convertHex = (data) => {
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
@@ -61,7 +61,7 @@ let convertHex = (data) => {
     };
 }
 
-let convertHsl = (data) => {
+const convertHsl = (data) => {
     let hsl = objectifyHsl(data);
     return {
         "rgb": parseRgb(tinycolor(hsl).toRgb(), "string"),
@@ -73,6 +73,18 @@ let convertHsl = (data) => {
         "bgColour": tinycolor(hsl).toHex()
     };
 };
+
+const getColourObject = (color) => ({
+    "rgb": parseRgb(color.toRgb(), "string"),
+    "hex": color.toHex(),
+    "hue": parseDecimal(color.toHsl()["h"]),
+    "rgbOpacity": 1,
+    "hexOpacity": 1,
+    "saturation": parseDecimal(color.toHsl()["s"]),
+    "lightness": parseDecimal(color.toHsl()["l"]),
+    "theme": color.isDark() ? "light" : "dark",
+    "bgColour": color.toHex()
+});
 
 helper = {
 
@@ -173,44 +185,11 @@ helper = {
         }
     },
 
-    randomise: () => {
-        var color = tinycolor.random();
-        return {
-            "rgb": parseRgb(color.toRgb(), "string"),
-            "hex": color.toHex(),
-            "hue": parseDecimal(color.toHsl()["h"]),
-            "saturation": parseDecimal(color.toHsl()["s"]),
-            "lightness": parseDecimal(color.toHsl()["l"]),
-            "theme": color.isDark() ? "light" : "dark",
-            "bgColour": color.toHex()
-        };
-    },
+    randomise: () => getColourObject(tinycolor.random()),
 
-    lighten: (hex) => {
-        var color = tinycolor(hex).lighten();
-        return {
-            "rgb": parseRgb(color.toRgb(), "string"),
-            "hex": color.toHex(),
-            "hue": parseDecimal(color.toHsl()["h"]),
-            "saturation": parseDecimal(color.toHsl()["s"]),
-            "lightness": parseDecimal(color.toHsl()["l"]),
-            "theme": color.isDark() ? "light" : "dark",
-            "bgColour": color.toHex()
-        };
-    },
+    lighten: (colour) => getColourObject(tinycolor(colour).lighten()),
 
-    darken: (hex) => {
-        var color = tinycolor(hex).darken();
-        return {
-            "rgb": parseRgb(color.toRgb(), "string"),
-            "hex": color.toHex(),
-            "hue": parseDecimal(color.toHsl()["h"]),
-            "saturation": parseDecimal(color.toHsl()["s"]),
-            "lightness": parseDecimal(color.toHsl()["l"]),
-            "theme": color.isDark() ? "light" : "dark",
-            "bgColour": color.toHex()
-        };
-    }
+    darken: (colour) => getColourObject(tinycolor(colour).darken())
 
 };
 

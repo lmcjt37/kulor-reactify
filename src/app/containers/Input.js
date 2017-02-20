@@ -22,9 +22,9 @@ export default class Inputs extends React.Component {
         const {value, name} = this[`${type}`];
 
         if (value === '' || value.length === 0 || value < 0) {
-          this.props.onStateChange({
-              [`${name}Opacity`] : 0
-          });
+            this.props.onStateChange({
+                [`${name}Opacity`] : 0
+            });
       }
     }
 
@@ -56,17 +56,17 @@ export default class Inputs extends React.Component {
 
             return (
                 <Input
-                  key={type}
-                  type='text'
-                  label={type.toUpperCase()}
-                  name={type}
-                  value={this.props[type]}
-                  onFocus={() => this.handleFocus(type)}
-                  onBlur={() => this.handleBlur(type)}
-                  onChange={() => this.handleChange(type)}
-                  theme={this.getInputTheme(this.props.theme)}
-                  opacity={this.props[`${type}Opacity`]}
-                  {...{prefix, suffix}} />
+                    key={type}
+                    type='text'
+                    label={type.toUpperCase()}
+                    name={type}
+                    value={this.props[type]}
+                    onFocus={() => this.handleFocus(type)}
+                    onBlur={() => this.handleBlur(type)}
+                    onChange={() => this.handleChange(type)}
+                    theme={this.getInputTheme(this.props.theme)}
+                    opacity={this.props[`${type}Opacity`]}
+                    {...{prefix, suffix}} />
             );
         });
     }

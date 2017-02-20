@@ -28,18 +28,15 @@ export default class App extends React.Component {
 
 
     handleStateChange = (data) => {
-        const {rgbOpacity = this.state.rgbOpacity, hexOpacity = this.state.hexOpacity} = data;
         if (ColourHelper.validateColours(data)) {
             this.setState({
                 ...ColourHelper.convertColours(data),
-                rgbOpacity,
-                hexOpacity
+                rgbOpacity: 1,
+                hexOpacity: 1
             });
         } else {
             this.setState({
-              ...data,
-              rgbOpacity,
-              hexOpacity
+                ...data
             });
         }
     }
