@@ -5,7 +5,6 @@ import ColourHelper from './helper/colourHelper.js';
 import Inputs from './containers/Input.js';
 import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
-// import ButtonBar from './containers/ButtonBar.js';
 import Nav from './containers/Nav.js';
 import config from './config';
 
@@ -61,9 +60,6 @@ export default class App extends React.Component {
                       {...{rgb, hex, theme, hue, saturation, lightness}}
                       onStateChange={this.handleStateChange} />
                 </div>
-
-                {/* <ButtonBar {...{ hex, buttonBar, buttonBarClasses }}
-                    onStateChange={this.handleStateChange} /> */}
 
                 <Nav {...{ hex, features, isOpen }}
                     onStateChange={this.handleStateChange} />
