@@ -2,7 +2,7 @@
 const features = {
     random: {
         icon: 'shuffle',
-        label: 'Randomise'
+        label: 'Random'
     },
     lighten: {
         icon: 'brightness_5',

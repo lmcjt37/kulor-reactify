@@ -1,10 +1,10 @@
 //vars
-$fg:#00bcd4;
+$fg:#2196f3;
 $bg:#673ab7;
 $pi:3.14;
 
 //config
-$menu-items:4;
+$menu-items:3;
 $open-distance:105px;
 $opening-angle:$pi*2;
 
@@ -21,7 +21,6 @@ $opening-angle:$pi*2;
   top:20px;
   color:white;
   text-align:center;
-  line-height:80px;
   transform:translate3d(0,0,0);
   transition:transform ease-out 200ms;
 }
@@ -84,15 +83,46 @@ $hamburger-spacing:8px;
 
 
 .menu-item{
-  &:hover{
-    background:white;
-    color:$fg;
+  // ripple effect
+  overflow:hidden;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
   }
+  &:active:after {
+    transform: scale(0, 0);
+    opacity: .2;
+    transition: 0s;
+  }
+
   @for $i from 1 through $menu-items{
     &:nth-child(#{$i+2}){
       transition-duration:180ms;
     }
   }
+  i {
+      display:inherit!important;
+      padding-top:15px;
+      width:100%;
+  }
+}
+
+.menu-item-span{
+  font-size:16px;
+  text-align:center;
+  width:100%;
 }
 
 .menu-open-button{
@@ -118,7 +148,7 @@ $hamburger-spacing:8px;
 
     &:nth-child(#{$i+2}){
       transition-duration:90ms+(100ms*$i);
-      transform:translate3d(110px*$i,0,0);
+      transform:translate3d(80px*$i,0,0);
     }
   }
 }

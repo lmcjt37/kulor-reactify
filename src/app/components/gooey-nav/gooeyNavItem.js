@@ -8,6 +8,6 @@ export default ({
 }) => (
     <a href="#" {...{onClick}} className={ theme['menu-item'] } >
         <i className="material-icons" >{icon}</i>
-        <span>{label}</span>
+        <span className={ theme['menu-item-span']}>{label}</span>
     </a>
 );
