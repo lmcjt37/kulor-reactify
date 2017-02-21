@@ -31,7 +31,7 @@ export default class ButtonBar extends React.Component {
                     key={name}
                     theme={themedButton}
                     onMouseUp={() => this.handleClick(name)}
-                    {...this.props.buttonBar[name]} />
+                    {...this.props.features[name]} />
             );
         });
 
