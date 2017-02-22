@@ -33,7 +33,12 @@ export default class Nav extends React.Component {
     }
 
     getNavItems() {
-        return ['random','lighten','darken'].map(name => {
+        const array = [];
+        for (var prop in this.props.features) {
+            array.push(prop);
+        }
+
+        return array.map(name => {
             return (
                 <GooeyNavItem
                     key={name}
