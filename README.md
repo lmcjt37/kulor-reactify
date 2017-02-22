@@ -21,6 +21,9 @@ Working project: http://lmcjt.com/kulor
 - SASS (http://sass-lang.com/)
 - TinyColour (https://github.com/bgrins/TinyColor)
 
+### Acknowledgements
+Navigation is based on [Lucas Bebber's Gooey Menu](http://codepen.io/lbebber/pen/rawQKR) but has been altered to work alongside React and React-toolbox
+
 ### Pipeline
 - Tooltips for hints on use
 - Add alpha
@@ -32,4 +35,8 @@ Working project: http://lmcjt.com/kulor
 Feel free to contact me directly through twitter @lmcjt or my website [lmcjt.com](http://lmcjt.com)
 
 ## Contributing
+- Fork and submit PR's
+- Raise issues/suggestions
+- Contact me directly for further information
+
 It's an ongoing project and contributions, issues or suggestions are welcome. You can contact me by any method you feel comfortable with. I don't adhere to any code of conduct, I just appreciate using your common sense and respecting others. Play nicely :kissing_heart:
