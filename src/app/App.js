@@ -5,7 +5,7 @@ import ColourHelper from './helper/colourHelper.js';
 import Inputs from './containers/Input.js';
 import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
-import ButtonBar from './containers/ButtonBar.js';
+import Nav from './containers/Nav.js';
 import config from './config';
 
 export default class App extends React.Component {
@@ -22,7 +22,8 @@ export default class App extends React.Component {
             lightness: 28,
             type: '',
             theme: 'light',
-            bgColour: '5B3256'
+            bgColour: '5B3256',
+            isOpen: false
         };
     }
 
@@ -42,9 +43,9 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { header:{ anchor, image }, buttonBar: buttonBar } = config;
+        const { header:{ anchor, image }, features: features } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, isOpen } = this.state;
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
@@ -60,7 +61,7 @@ export default class App extends React.Component {
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                <ButtonBar {...{ hex, buttonBar, buttonBarClasses }}
+                <Nav {...{ hex, features, isOpen }}
                     onStateChange={this.handleStateChange} />
             </div>
         );

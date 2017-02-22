@@ -6,6 +6,4 @@ export default ({
     label,
     theme,
     onMouseUp
-}) => (
-    <Button {...{icon, label, theme, onMouseUp}} raised primary />
-);
+}) => <Button {...{icon, label, theme, onMouseUp}} raised primary />;

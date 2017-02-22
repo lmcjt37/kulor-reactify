@@ -1,9 +1,9 @@
 import header from './header';
-import buttonBar from './buttonBar';
+import features from './features';
 
 const appConfig =  {
     header,
-    buttonBar
+    features
 };
 
 
