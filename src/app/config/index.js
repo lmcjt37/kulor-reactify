@@ -1,9 +1,13 @@
 import header from './header';
-import buttonBar from './buttonBar';
+import features from './features';
+import inputs from './inputs';
+import sliders from './sliders';
 
 const appConfig =  {
     header,
-    buttonBar
+    features,
+    inputs,
+    sliders
 };
 
 

@@ -1,8 +1,8 @@
 
-const buttonBar = {
+const features = {
     random: {
         icon: 'shuffle',
-        label: 'Randomise'
+        label: 'Random'
     },
     lighten: {
         icon: 'brightness_5',
@@ -14,4 +14,4 @@ const buttonBar = {
     }
 }
 
-export default buttonBar;
+export default features;

@@ -1,11 +1,10 @@
 import React from 'react';
-import Main from './theme/main.scss';
-import ColourHelper from './helper/colourHelper.js';
-
-import Inputs from './containers/Input.js';
-import Sliders from './containers/Slider.js';
-import Header from './containers/Header.js';
-import ButtonBar from './containers/ButtonBar.js';
+import Main from './theme/main';
+import ColourHelper from './helper/colourHelper';
+import Inputs from './containers/Input';
+import Sliders from './containers/Slider';
+import Header from './containers/Header';
+import ButtonBar from './containers/ButtonBar';
 import config from './config';
 
 export default class App extends React.Component {
@@ -42,7 +41,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { header:{ anchor, image }, buttonBar: buttonBar } = config;
+        const { header:{ anchor, image }, features, inputs, sliders } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
         const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness } = this.state;
 
@@ -52,15 +51,15 @@ export default class App extends React.Component {
 
                 <div className={centerControlsClasses}>
                     <Inputs
-                      {...{rgb, hex, theme, hexOpacity, rgbOpacity}}
+                      {...{rgb, hex, theme, hexOpacity, rgbOpacity, inputs}}
                       onStateChange={this.handleStateChange} />
 
                     <Sliders
-                      {...{rgb, hex, theme, hue, saturation, lightness}}
+                      {...{rgb, hex, theme, hue, saturation, lightness, sliders}}
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                <ButtonBar {...{ hex, buttonBar, buttonBarClasses }}
+                <ButtonBar {...{ hex, features, buttonBarClasses }}
                     onStateChange={this.handleStateChange} />
             </div>
         );

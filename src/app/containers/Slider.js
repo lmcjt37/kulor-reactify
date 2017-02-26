@@ -1,8 +1,7 @@
 import React from 'react';
 import Slider from '../components/FormSlider';
-
-import themedSliderLight from '../theme/themedSliderLight.scss';
-import themedSliderDark from '../theme/themedSliderDark.scss';
+import themedSliderLight from '../theme/themedSliderLight';
+import themedSliderDark from '../theme/themedSliderDark';
 
 export default class Sliders extends React.Component {
 
@@ -30,20 +29,14 @@ export default class Sliders extends React.Component {
     }
 
     getColourSliders(sliderTheme) {
-        return [
-          {
-            type: 'hue', min: 0, max: 360, step: 1
-          },
-          {
-            type: 'saturation', min: 0, max: 100, step: 1
-          },
-          {
-            type: 'lightness', min: 0, max: 100, step: 1
-          }
-        ].map(({type, min, max, step}) => (
+        const array = [];
+        for (var prop in this.props.sliders) {
+            array.push(prop);
+        }
+        return array.map(type => (
             <Slider
               key={type}
-              {...{min, max, step}}
+              {...this.props.sliders[type]}
               editable
               label={`${type.charAt(0).toUpperCase()}${type.slice(1)}`}
               value={this.props[type]}
