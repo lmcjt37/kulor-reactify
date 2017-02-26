@@ -22,11 +22,11 @@ Working project: http://lmcjt.com/kulor
 - TinyColour (https://github.com/bgrins/TinyColor)
 
 ### Pipeline
-- Tooltips for hints on use
+- Tooltips for hints on use and limitations
 - Add alpha
-- Additional colour modes
-- Ability to get different colour combos (triad/complementary/tetrad)
+- lighten/darken percentage +/-
 - Colour palette for storing colours from the session
+- Ability to get different colour combos (triad/complementary/tetrad)
 
 ## Contact
 Feel free to contact me directly through twitter @lmcjt or my website [lmcjt.com](http://lmcjt.com)
