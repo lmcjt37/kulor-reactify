@@ -4,6 +4,7 @@ import ColourHelper from './helper/colourHelper';
 import Inputs from './containers/Input';
 import Sliders from './containers/Slider';
 import Header from './containers/Header';
+import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
 import config from './config';
 
@@ -43,11 +44,12 @@ export default class App extends React.Component {
     render() {
         const { header:{ anchor, image }, features, inputs, sliders } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour } = this.state;
 
         return (
-            <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
+            <div className={fullPageClasses} style={{backgroundColor: `#${bgColour}`}}>
                 <Header {...{ anchor, image, headerClasses }} />
+                <GithubLink {...{theme, bgColour}}/>
 
                 <div className={centerControlsClasses}>
                     <Inputs

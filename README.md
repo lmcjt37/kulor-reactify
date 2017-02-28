@@ -21,6 +21,9 @@ Working project: http://lmcjt.com/kulor
 - SASS (http://sass-lang.com/)
 - TinyColour (https://github.com/bgrins/TinyColor)
 
+### Acknowledgements
+- Github corner link was created by [Tim Holman](http://tholman.com/github-corners/)
+
 ### Pipeline
 - Tooltips for hints on use and limitations
 - Add alpha
