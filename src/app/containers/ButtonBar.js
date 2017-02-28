@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../components/Button';
-import ColourHelper from '../helper/colourHelper.js';
-import themedButton from '../theme/themedButton.scss';
+import ColourHelper from '../helper/colourHelper';
+import themedButton from '../theme/themedButton';
 
 export default class ButtonBar extends React.Component {
 
@@ -25,13 +25,17 @@ export default class ButtonBar extends React.Component {
     }
 
     getButtons() {
-        return ['random','lighten','darken'].map(name => {
+        const array = [];
+        for (var prop in this.props.features) {
+            array.push(prop);
+        }
+        return array.map(name => {
             return (
                 <Button
                     key={name}
                     theme={themedButton}
                     onMouseUp={() => this.handleClick(name)}
-                    {...this.props.buttonBar[name]} />
+                    {...this.props.features[name]} />
             );
         });
 
