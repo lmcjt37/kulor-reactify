@@ -15,7 +15,6 @@ export default ({
     suffix
 }) => {
     const {inputPrefix, inputSuffix, inputWrapper} = theme;
-
     return (
         <div className={inputWrapper} data-ref={name}>
             <p className={inputPrefix} style={{opacity: opacity}}>

@@ -22,14 +22,15 @@ Working project: http://lmcjt.com/kulor
 - TinyColour (https://github.com/bgrins/TinyColor)
 
 ### Acknowledgements
-Navigation is based on [Lucas Bebber's Gooey Menu](http://codepen.io/lbebber/pen/rawQKR) but has been altered to work alongside React and React-toolbox
+- Navigation is based on [Lucas Bebber's Gooey Menu](http://codepen.io/lbebber/pen/rawQKR) but has been altered to work alongside React and React-toolbox
+- Github corner link was created by [Tim Holman](http://tholman.com/github-corners/)
 
 ### Pipeline
-- Tooltips for hints on use
+- Tooltips for hints on use and limitations
 - Add alpha
-- Additional colour modes
-- Ability to get different colour combos (triad/complementary/tetrad)
+- lighten/darken percentage +/-
 - Colour palette for storing colours from the session
+- Ability to get different colour combos (triad/complementary/tetrad)
 
 ## Contact
 Feel free to contact me directly through twitter @lmcjt or my website [lmcjt.com](http://lmcjt.com)

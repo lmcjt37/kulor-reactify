@@ -1,9 +1,8 @@
 import React from 'react';
 import Input from '../components/FormInput';
-import ColourHelper from '../helper/colourHelper.js';
-
-import themedInputLight from '../theme/themedInputLight.scss';
-import themedInputDark from '../theme/themedInputDark.scss';
+import ColourHelper from '../helper/colourHelper';
+import themedInputLight from '../theme/themedInputLight';
+import themedInputDark from '../theme/themedInputDark';
 
 export default class Inputs extends React.Component {
 
@@ -39,21 +38,12 @@ export default class Inputs extends React.Component {
     }
 
     getColourInputs() {
-        const typeDecoration = {
-            rgb: {
-                prefix: '(',
-                suffix: ')'
-            },
-            hex: {
-                prefix: '#',
-                suffix: ''
-            }
-        };
-
-        return ["rgb", "hex"].map(type => {
-
-            const {[type]: {prefix = null, suffix = null}} = typeDecoration;
-
+        const array = [];
+        for (var prop in this.props.inputs) {
+            array.push(prop);
+        }
+        return array.map(type => {
+            const {[type]: {prefix = null, suffix = null}} = this.props.inputs;
             return (
                 <Input
                     key={type}
