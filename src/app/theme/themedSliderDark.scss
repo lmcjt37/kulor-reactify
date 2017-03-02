@@ -1,12 +1,18 @@
+$baseColour: #404040;
+
 .sliderLabel {
     color: rgba(64, 64, 64, 0.4);
 }
 .input {
     input {
-        border-bottom: 1px solid #404040;
-        color: #404040;
+        border-bottom: 1px solid $baseColour;
+        color: $baseColour;
     }
 }
 .wrapper {
     padding-top: 4rem;
+}
+
+.innerprogress {
+    background: $baseColour;
 }
