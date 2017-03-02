@@ -7,6 +7,7 @@ import Sliders from './containers/Slider';
 import Header from './containers/Header';
 import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
+import Nav from './containers/Nav';
 import config from './config';
 
 export default class App extends React.Component {
@@ -44,12 +45,16 @@ export default class App extends React.Component {
         }
     }
 
+    handleResizeChange = () => {
+        this.setState({...UtilsHelper.getScreenSize()});
+    }
+
     componentWillMount() {
-        window.addEventListener("onsize", this.setState(...UtilsHelper.getScreenSize()));
+        window.addEventListener("resize", this.handleResizeChange);
     }
 
     componentWillUnmount() {
-        window.removeEventListener("onsize", this.setState(...UtilsHelper.getScreenSize()));
+        window.removeEventListener("resize", this.handleResizeChange);
     }
 
     render() {
@@ -80,8 +85,8 @@ export default class App extends React.Component {
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                {this.getNavigation()}
-                
+                {getNavigation()}
+
             </div>
         );
     }
