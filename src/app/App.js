@@ -1,10 +1,13 @@
 import React from 'react';
 import Main from './theme/main.scss';
+
 import ColourHelper from './helper/colourHelper.js';
+import UtilsHelper from './helper/utilsHelper.js';
 
 import Inputs from './containers/Input.js';
 import Sliders from './containers/Slider.js';
 import Header from './containers/Header.js';
+import ButtonBar from './containers/ButtonBar.js';
 import Nav from './containers/Nav.js';
 import config from './config';
 
@@ -23,7 +26,8 @@ export default class App extends React.Component {
             type: '',
             theme: 'light',
             bgColour: '5B3256',
-            isOpen: false
+            isOpen: false,
+            isHandheld: false
         };
     }
 
@@ -42,10 +46,27 @@ export default class App extends React.Component {
         }
     }
 
+    componentWillMount() {
+        window.addEventListener("onsize", this.setState(...UtilsHelper.getScreenSize()));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("onsize", this.setState(...UtilsHelper.getScreenSize()));
+    }
+
     render() {
         const { header:{ anchor, image }, features: features } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, isOpen } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, isOpen, isHandheld } = this.state;
+
+        let getNavigation = () => {
+            if (isHandheld) {
+                return <ButtonBar {...{ hex, features, buttonBarClasses }} onStateChange={this.handleStateChange} />;
+            } else {
+                return <Nav {...{ hex, features, isOpen }} onStateChange={this.handleStateChange} />
+            }
+        }
+
 
         return (
             <div className={fullPageClasses} style={{backgroundColor: `#${this.state.bgColour}`}}>
@@ -61,8 +82,7 @@ export default class App extends React.Component {
                       onStateChange={this.handleStateChange} />
                 </div>
 
-                <Nav {...{ hex, features, isOpen }}
-                    onStateChange={this.handleStateChange} />
+                {this.getNavigation()}
             </div>
         );
     }
