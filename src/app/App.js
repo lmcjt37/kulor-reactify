@@ -6,6 +6,7 @@ import Sliders from './containers/Slider';
 import Header from './containers/Header';
 import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
+import Hints from './containers/Hints';
 import config from './config';
 
 export default class App extends React.Component {
@@ -22,7 +23,8 @@ export default class App extends React.Component {
             lightness: 28,
             type: '',
             theme: 'light',
-            bgColour: '5B3256'
+            bgColour: '5B3256',
+            isDialogActive: false
         };
     }
 
@@ -42,27 +44,31 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { header:{ anchor, image }, features, inputs, sliders } = config;
+        const { header:{ anchor, image }, features, inputs, sliders, dialogs } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isDialogActive } = this.state;
 
         return (
-            <div className={fullPageClasses} style={{backgroundColor: `#${bgColour}`}}>
+            <div className={ fullPageClasses } style={{backgroundColor: `#${bgColour}`}}>
                 <Header {...{ anchor, image, headerClasses }} />
-                <GithubLink {...{theme, bgColour}}/>
+                
+                <GithubLink {...{ theme, bgColour }}/>
 
-                <div className={centerControlsClasses}>
+                <div className={ centerControlsClasses }>
                     <Inputs
-                      {...{rgb, hex, theme, hexOpacity, rgbOpacity, inputs}}
-                      onStateChange={this.handleStateChange} />
+                      {...{ rgb, hex, theme, hexOpacity, rgbOpacity, inputs }}
+                      onStateChange={ this.handleStateChange } />
 
                     <Sliders
-                      {...{rgb, hex, theme, hue, saturation, lightness, sliders}}
-                      onStateChange={this.handleStateChange} />
+                      {...{ rgb, hex, theme, hue, saturation, lightness, sliders }}
+                      onStateChange={ this.handleStateChange } />
                 </div>
 
-                <ButtonBar {...{ hex, features, buttonBarClasses }}
-                    onStateChange={this.handleStateChange} />
+                <ButtonBar {...{ hex, features, buttonBarClasses, theme }}
+                    onStateChange={ this.handleStateChange } />
+
+                <Hints {...{ dialogs, isDialogActive }}
+                    onStateChange={ this.handleStateChange } />
             </div>
         );
     }
