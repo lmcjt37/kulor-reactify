@@ -1,5 +1,6 @@
 import React from 'react';
 import Dialog from 'react-toolbox/lib/dialog';
+import themedHints from '../theme/themedHints';
 
 export default class Hints extends React.Component {
 
@@ -9,7 +10,11 @@ export default class Hints extends React.Component {
 
     getContent() {
         let array = this.props.dialogs.helphints.text;
-        return array.map((text,i) => <p key={i} style={{paddingBottom: '10px'}}>{text}</p>);
+        return (
+            <ul className={themedHints.list}>
+                {array.map((text,i) => <li key={i} className={themedHints.listItem}>{text}</li>)}
+            </ul>
+        )
     }
 
     handleToggle() {
