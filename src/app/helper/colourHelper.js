@@ -121,7 +121,7 @@ helper = {
     },
 
     trimRgb: (colour) => {
-        let tmp = JSON.stringify(colour).replace(/[^\w\s\,\.]|[rgb]/g, "");
+        let tmp = JSON.stringify(colour).replace(/[^\w\,\.]|[rgb]/g, "");
         let count = 0;
         // prevents extra commas
         if (tmp.substring(11, 12) === ",") {
