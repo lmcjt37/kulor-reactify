@@ -1,9 +1,5 @@
 
 const features = {
-    hints: {
-        icon: 'help_outline',
-        label: ''
-    },
     random: {
         icon: 'shuffle',
         label: 'Random'
@@ -16,6 +12,6 @@ const features = {
         icon: 'brightness_4',
         label: 'Darken'
     }
-}
+};
 
 export default features;

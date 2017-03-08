@@ -1,12 +1,22 @@
+$baseColour: #404040;
+$break-small: 480px;
+
 .sliderLabel {
     color: rgba(64, 64, 64, 0.4);
 }
 .input {
     input {
-        border-bottom: 1px solid #404040;
-        color: #404040;
+        border-bottom: 1px solid $baseColour;
+        color: $baseColour;
     }
 }
 .wrapper {
     padding-top: 4rem;
+    @media screen and (max-width: $break-small) {
+        padding-top: 2rem;
+    }
+}
+
+.innerprogress {
+    background: $baseColour;
 }

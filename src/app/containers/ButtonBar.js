@@ -11,9 +11,6 @@ export default class ButtonBar extends React.Component {
 
     handleClick(name) {
         switch(name){
-            case "hints":
-                this.props.onStateChange({ isDialogActive: true });
-                break;
             case "random":
                 this.props.onStateChange(ColourHelper.randomise());
                 break;
@@ -28,7 +25,7 @@ export default class ButtonBar extends React.Component {
     }
 
     getButtons() {
-        const array = [];
+        let array = [];
         for (var prop in this.props.features) {
             array.push(prop);
         }
@@ -36,9 +33,7 @@ export default class ButtonBar extends React.Component {
             return (
                 <Button
                     key={name}
-                    name={name}
                     theme={themedButton}
-                    styling={this.props.theme}
                     onMouseUp={() => this.handleClick(name)}
                     {...this.props.features[name]} />
             );
