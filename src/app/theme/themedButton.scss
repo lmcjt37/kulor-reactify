@@ -1,4 +1,4 @@
-$break-small: 320px;
+$break-small: 360px;
 
 .button:not(:first-child) {
     @media screen and (min-width: $break-small) {

@@ -25,7 +25,7 @@ export default class ButtonBar extends React.Component {
     }
 
     getButtons() {
-        const array = [];
+        let array = [];
         for (var prop in this.props.features) {
             array.push(prop);
         }

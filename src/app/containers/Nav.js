@@ -1,6 +1,5 @@
 import React from 'react';
 import ColourHelper from '../helper/colourHelper';
-
 import themedGooeyNav from '../theme/themedGooeyNav';
 import GooeyNavItem from '../components/gooey-nav/gooeyNavItem';
 
@@ -31,8 +30,8 @@ export default class Nav extends React.Component {
 
     }
 
-    getNavItems() {
-        const array = [];
+    getGooeyNavItems() {
+        let array = [];
         for (var prop in this.props.features) {
             array.push(prop);
         }
@@ -46,7 +45,6 @@ export default class Nav extends React.Component {
                     {...this.props.features[name]} />
             );
         });
-
     }
 
     render() {
@@ -59,7 +57,7 @@ export default class Nav extends React.Component {
                     <span className={`${themedGooeyNav.hamburger} ${themedGooeyNav['hamburger-3']}`}></span>
                 </label>
 
-                {this.getNavItems()}
+                {this.getGooeyNavItems()}
 
             </nav>
         );

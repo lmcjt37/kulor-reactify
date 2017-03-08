@@ -1,14 +1,20 @@
 import React from 'react';
-import Main from './theme/main';
+
 import ColourHelper from './helper/colourHelper';
 import UtilsHelper from './helper/utilsHelper';
+
 import Inputs from './containers/Input';
 import Sliders from './containers/Slider';
 import Header from './containers/Header';
 import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
 import Nav from './containers/Nav';
+import Hints from './containers/Hints';
+
 import GooeySvg from './components/gooey-nav/gooeySvg';
+import IconButton from './components/IconButton';
+
+import Main from './theme/main';
 import config from './config';
 
 export default class App extends React.Component {
@@ -27,7 +33,8 @@ export default class App extends React.Component {
             theme: 'light',
             bgColour: '5B3256',
             isOpen: false,
-            isHandheld: false
+            isHandheld: null,
+            isDialogActive: false
         };
     }
 
@@ -50,6 +57,10 @@ export default class App extends React.Component {
         this.setState({...UtilsHelper.getScreenSize()});
     }
 
+    componentDidMount() {
+        this.handleResizeChange();
+    }
+
     componentWillMount() {
         window.addEventListener("resize", this.handleResizeChange);
     }
@@ -59,9 +70,9 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { header:{ anchor, image }, features, inputs, sliders } = config;
-        const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isOpen, isHandheld } = this.state;
+        const { header:{ anchor, image }, features, inputs, sliders, dialogs } = config;
+        const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses, helpHints: helpHintsClasses } = Main;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isOpen, isHandheld, isDialogActive } = this.state;
 
         let getNavigation = () => {
             if (isHandheld) {
@@ -72,24 +83,36 @@ export default class App extends React.Component {
         }
 
         return (
-            <div className={fullPageClasses} style={{backgroundColor: `#${bgColour}`}}>
+            <div className={ fullPageClasses } style={{backgroundColor: `#${bgColour}`}}>
                 <Header {...{ anchor, image, headerClasses }} />
-                <GithubLink {...{theme, bgColour}}/>
 
-                <div className={centerControlsClasses}>
+                <GithubLink {...{ theme, bgColour }}/>
+
+                <div className={ centerControlsClasses }>
                     <Inputs
-                      {...{rgb, hex, theme, hexOpacity, rgbOpacity, inputs}}
-                      onStateChange={this.handleStateChange} />
+                      {...{ rgb, hex, theme, hexOpacity, rgbOpacity, inputs }}
+                      onStateChange={ this.handleStateChange } />
 
                     <Sliders
-                      {...{rgb, hex, theme, hue, saturation, lightness, sliders}}
-                      onStateChange={this.handleStateChange} />
+                      {...{ rgb, hex, theme, hue, saturation, lightness, sliders }}
+                      onStateChange={ this.handleStateChange } />
                 </div>
 
                 {getNavigation()}
 
-                <GooeySvg id="gooey-nav-svgs" />
+                <div className={ helpHintsClasses }>
+                    <IconButton
+                        icon='help_outline'
+                        inverse={ theme === "light" ? true : false }
+                        onMouseUp={ () => this.handleStateChange({ isDialogActive: true }) }
+                    />
+                </div>
 
+                <Hints {...{ dialogs, isDialogActive }}
+                    onStateChange={ this.handleStateChange } />
+
+                {/* Adds filters to the DOM for gooey navigation */}
+                <GooeySvg id="gooey-nav-svgs" />
             </div>
         );
     }

@@ -33,15 +33,28 @@ $break-medium: 767px;
 
 .buttonBar {
     height: 50%;
-    margin: auto;
+    margin: 4% auto;
     padding-top: 4%;
     position: relative;
     text-align: center;
     width: 50%;
     @media screen and (max-width: $break-medium) {
+        padding-top: 2%;
         width: 80%;
     }
     @media screen and (max-width: $break-small) {
+        padding-top: 2%;
         width: 90%;
+    }
+}
+
+.helpHints {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    @media screen and (max-width: $break-small) {
+        position: relative;
+        float: right;
+        margin-top: 20px;
     }
 }
