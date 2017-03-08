@@ -7,6 +7,7 @@ Includes:
 * Randomisation
 * Lighten
 * Darken
+* Handy Help Hints
 * More to come...
 
 ## Getting Started
@@ -25,7 +26,6 @@ Working project: http://lmcjt.com/kulor
 - Github corner link was created by [Tim Holman](http://tholman.com/github-corners/)
 
 ### Pipeline
-- Tooltips for hints on use and limitations
 - Add alpha
 - lighten/darken percentage +/-
 - Colour palette for storing colours from the session

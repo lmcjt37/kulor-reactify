@@ -1,5 +1,9 @@
 
 const features = {
+    hints: {
+        icon: 'help_outline',
+        label: ''
+    },
     random: {
         icon: 'shuffle',
         label: 'Random'
