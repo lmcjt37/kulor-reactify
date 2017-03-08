@@ -1,9 +1,8 @@
 import React from 'react';
-import ColourHelper from '../helper/colourHelper.js';
+import ColourHelper from '../helper/colourHelper';
 
-import themedGooeyNav from '../theme/themedGooeyNav.scss';
-import GooeyNavItem from '../components/gooey-nav/gooeyNavItem.js';
-import GooeySvg from '../components/gooey-nav/gooeySvg.js';
+import themedGooeyNav from '../theme/themedGooeyNav';
+import GooeyNavItem from '../components/gooey-nav/gooeyNavItem';
 
 export default class Nav extends React.Component {
 
@@ -48,13 +47,6 @@ export default class Nav extends React.Component {
             );
         });
 
-    }
-
-    componentWillMount() {
-        if (document.querySelector("#gooey-nav-svgs")) return;
-
-        const domNode = GooeySvg({ id: "gooey-nav-svgs" });
-        document.body.appendChild(domNode);
     }
 
     render() {

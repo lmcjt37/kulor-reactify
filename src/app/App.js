@@ -8,6 +8,7 @@ import Header from './containers/Header';
 import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
 import Nav from './containers/Nav';
+import GooeySvg from './components/gooey-nav/gooeySvg';
 import config from './config';
 
 export default class App extends React.Component {
@@ -86,6 +87,8 @@ export default class App extends React.Component {
                 </div>
 
                 {getNavigation()}
+
+                <GooeySvg id="gooey-nav-svgs" />
 
             </div>
         );
