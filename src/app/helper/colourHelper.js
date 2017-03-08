@@ -121,7 +121,12 @@ helper = {
     },
 
     trimRgb: (colour) => {
-        let tmp = JSON.stringify(colour).replace(/[^\w\,\.]|[rgb]/g, "");
+        let tmp = JSON.stringify(colour);
+        //replaces space delimatation with commas
+        if (tmp.indexOf(",") === -1) {
+            tmp = tmp.replace(/\s/g, ",");
+        }
+        tmp = tmp.replace(/[^\w\,\.]|[rgb]/g, "");
         let count = 0;
         // prevents extra commas
         if (tmp.substring(11, 12) === ",") {
@@ -133,7 +138,6 @@ helper = {
         }
         // strips commas to get raw count
         count = tmp.replace(/,/g, "").length;
-
         // adds missing commas dynamically
         let arr = tmp.split("");
         let commaCount = 0;
@@ -152,9 +156,12 @@ helper = {
             }
         });
 
-        // sets limit to 11 with commas
         if (count >= 10) {
+            // sets limit to 11 with commas
             return tmp.substring(0, 11);
+        } else if (tmp.match(/,/g).length >=2 && tmp.split(",")[2].length > 3) {
+            // checks number of sections, capping 3rd section with 3 digits
+            return tmp.substring(0, tmp.length-1);
         } else {
             return tmp;
         }
