@@ -88,24 +88,16 @@ const getColourObject = (color) => ({
 
 helper = {
 
-    validateRgb: (rgb) => {
-        return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
-    },
-
-    validateHex: (hex) => {
-        if (hex.length === 3 || hex.length === 6) {
-            return true;
-        }
-        return false;
-    },
-
     validateColours({type, rgb, hex}) {
         switch (type) {
             case "rgb":
-                return helper.validateRgb(rgb);
+                return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
                 break;
             case "hex":
-                return helper.validateHex(hex);
+                if (hex.length === 3 || hex.length === 6) {
+                    return true;
+                }
+                return false;
                 break;
             case "hue":
             case "saturation":
@@ -126,8 +118,8 @@ helper = {
         if (tmp.indexOf(",") === -1) {
             tmp = tmp.replace(/\s/g, ",");
         }
+        // strips unwanted characters
         tmp = tmp.replace(/[^\w\,\.]|[rgb]/g, "");
-        let count = 0;
         // prevents extra commas
         if (tmp.substring(11, 12) === ",") {
             tmp = tmp.substring(0, 11);
@@ -137,6 +129,7 @@ helper = {
             tmp = tmp.substring(1);
         }
         // strips commas to get raw count
+        let count = 0;
         count = tmp.replace(/,/g, "").length;
         // adds missing commas dynamically
         let arr = tmp.split("");
@@ -155,6 +148,20 @@ helper = {
                 }
             }
         });
+
+        // limit rgb input to 0-255
+        // also, parses value > 0, starting with 0 eg. 010
+        let arrb = [];
+        tmp.split(",").forEach(item => {
+            if (item > 255) {
+                arrb.push(parseInt(item.substring(0, item.length-1)));
+            } else if (item > 0) {
+                arrb.push(parseInt(item));
+            } else {
+                arrb.push(item);
+            }
+        });
+        tmp = arrb.join();
 
         if (count >= 10) {
             // sets limit to 11 with commas
