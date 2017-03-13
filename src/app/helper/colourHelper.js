@@ -92,13 +92,11 @@ helper = {
         switch (type) {
             case "rgb":
                 return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$/gim) !== null;
-                break;
             case "hex":
                 if (hex.length === 3 || hex.length === 6) {
                     return true;
                 }
                 return false;
-                break;
             case "hue":
             case "saturation":
             case "lightness":
@@ -106,7 +104,6 @@ helper = {
                 * no validation - constrained and always returned as String
                 */
                 return true;
-                break;
             default:
                 return false;
         }
@@ -151,22 +148,20 @@ helper = {
 
         // limit rgb input to 0-255
         // also, parses value > 0, starting with 0 eg. 010
-        let arrb = [];
-        tmp.split(",").forEach(item => {
+        tmp = tmp.split(',').map(item => {
             if (item > 255) {
-                arrb.push(parseInt(item.substring(0, item.length-1)));
+                return parseInt(item.substring(0, item.length-1));
             } else if (item > 0) {
-                arrb.push(parseInt(item));
+                return parseInt(item);
             } else {
-                arrb.push(item);
+                return item;
             }
-        });
-        tmp = arrb.join();
+        }).join();
 
         if (count >= 10) {
             // sets limit to 11 with commas
             return tmp.substring(0, 11);
-        } else if (tmp.match(/,/g).length >=2 && tmp.split(",")[2].length > 3) {
+        } else if (tmp.indexOf(",") !== -1 && tmp.match(/,/g).length >=2 && tmp.split(",")[2].length > 3) {
             // checks number of sections, capping 3rd section with 3 digits
             return tmp.substring(0, tmp.length-1);
         } else {
