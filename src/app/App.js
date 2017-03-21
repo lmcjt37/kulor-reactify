@@ -10,6 +10,7 @@ import GithubLink from './containers/GithubLink';
 import ButtonBar from './containers/ButtonBar';
 import Nav from './containers/Nav';
 import Hints from './containers/Hints';
+import Toast from './containers/Toast';
 
 import GooeySvg from './components/gooey-nav/gooeySvg';
 import IconButton from './components/IconButton';
@@ -34,7 +35,9 @@ export default class App extends React.Component {
             bgColour: '5B3256',
             isOpen: false,
             isHandheld: null,
-            isDialogActive: false
+            isDialogActive: false,
+            showToast: false,
+            toastMessage: ''
         };
     }
 
@@ -72,7 +75,7 @@ export default class App extends React.Component {
     render() {
         const { header:{ anchor, image }, features, inputs, sliders, dialogs } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses, helpHints: helpHintsClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isOpen, isHandheld, isDialogActive } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isOpen, isHandheld, isDialogActive, showToast, toastMessage } = this.state;
 
         let getNavigation = () => {
             if (isHandheld) {
@@ -109,6 +112,9 @@ export default class App extends React.Component {
                 </div>
 
                 <Hints {...{ dialogs, isDialogActive }}
+                    onStateChange={ this.handleStateChange } />
+
+                <Toast {...{ showToast, toastMessage }}
                     onStateChange={ this.handleStateChange } />
 
                 {/* Adds filters to the DOM for gooey navigation */}
