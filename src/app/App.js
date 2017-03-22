@@ -106,7 +106,7 @@ export default class App extends React.Component {
                 <div className={ helpHintsClasses }>
                     <IconButton
                         icon='help_outline'
-                        inverse={ theme === "light" ? true : false }
+                        inverse={ theme === "light" }
                         onMouseUp={ () => this.handleStateChange({ isDialogActive: true }) }
                     />
                 </div>

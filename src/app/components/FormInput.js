@@ -40,7 +40,7 @@ export default ({
             <div className={inputCopy} >
                 <IconButton
                     icon='save'
-                    inverse={ styling === "light" ? true : false }
+                    inverse={ styling === "light" }
                     onMouseUp={ () => copyToClipboard() }
                     theme={theme}
                 />
