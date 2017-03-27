@@ -10,12 +10,13 @@ export default class Sliders extends React.Component {
     }
 
     handleChange = (slider, value) => {
-        const {hue, saturation, lightness, onStateChange} = this.props;
+        const {hue, saturation, lightness, alpha, onStateChange} = this.props;
 
         onStateChange({
             hue,
             saturation,
             lightness,
+            alpha,
             [slider]: value,
             type: slider
         });

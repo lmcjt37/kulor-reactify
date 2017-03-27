@@ -29,6 +29,7 @@ export default class App extends React.Component {
             hexOpacity: 1,
             saturation: 29,
             lightness: 28,
+            alpha: 1.0,
             type: '',
             theme: 'light',
             bgColour: '5B3256',
@@ -72,7 +73,7 @@ export default class App extends React.Component {
     render() {
         const { header:{ anchor, image }, features, inputs, sliders, dialogs } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses, helpHints: helpHintsClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, bgColour, isOpen, isHandheld, isDialogActive } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, alpha, bgColour, isOpen, isHandheld, isDialogActive } = this.state;
 
         let getNavigation = () => {
             if (isHandheld) {
@@ -94,7 +95,7 @@ export default class App extends React.Component {
                       onStateChange={ this.handleStateChange } />
 
                     <Sliders
-                      {...{ rgb, hex, theme, hue, saturation, lightness, sliders }}
+                      {...{ rgb, hex, theme, hue, saturation, lightness, alpha, sliders }}
                       onStateChange={ this.handleStateChange } />
                 </div>
 
