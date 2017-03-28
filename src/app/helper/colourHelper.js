@@ -157,14 +157,14 @@ helper = {
         }
         // strips commas to get raw count
         let count = 0;
-        count = tmp.replace(/,/g, "").length;
+        count = tmp.replace(/\,/g, "").length;
         // adds missing commas dynamically
         let arr = tmp.split("");
         let commaCount = 0;
         let inc = 0;
         arr.forEach((chr, idx) => {
             inc++;
-            if (commaCount < 2) {
+            if (commaCount < 3) {
                 if(chr === ",") {
                     commaCount++;
                     inc = 0;
@@ -173,6 +173,28 @@ helper = {
                     tmp = tmp.substring(0,idx) + "," + tmp.substring(idx);
                     inc = 0;
                 }
+            }
+            // restrict section 4 to a digit-decimal-digit pattern
+            if (commaCount === 3) {
+                console.log(1);
+                console.log("inc --> ", inc);
+                console.log("chr --> ", chr);
+                if (inc === 1 && chr.match(/[^\d]/gim).length != null && chr.match(/[^\d]/gim).length > 0) {
+                    console.log(2);
+                    tmp = tmp.substring(0, idx);
+                }
+                if (inc === 2 && chr.match(/[^\.]/gim).length != null && chr.match(/[^\.]/gim).length > 0) {
+                    console.log(3);
+                    tmp = tmp.substring(0, idx);
+                }
+                if (inc === 3 && chr.match(/[^\d]/gim).length != null && chr.match(/[^\d]/gim).length > 0) {
+                    console.log(4);
+                    tmp = tmp.substring(0, idx);
+                }
+            }
+            // caps sections to 3 chars
+            if (commaCount === 3 && inc > 3) {
+                tmp = tmp.substring(0, idx);
             }
         });
 
@@ -192,19 +214,15 @@ helper = {
         }).join();
 
         if (count >= 14) {
-            console.log(1);
             // sets limit to 15 with commas
             return tmp.substring(0, 15);
-        } else if (tmp.indexOf(",") !== -1 && tmp.match(/,/g).length > 3) {
-            console.log(2);
+        } else if (tmp.indexOf(".") !== -1 && tmp.match(/\./g).length > 1) {
+            // restrict fullstops
+            return tmp.substring(0, tmp.length-1);
+        } else if (tmp.indexOf(",") !== -1 && tmp.match(/\,/g).length > 3) {
             // restricts to 4 sections based on 3 commas
             return tmp.substring(0, tmp.length-1);
-        // } else if (tmp.match(/,/g).length === 3 && tmp.indexOf(".") !== -1 && tmp.match(/./g).length >= 2) {
-        //     console.log(3);
-        //     // restrict fullstops
-        //     return tmp.substring(0, tmp.length-1);
         } else {
-            console.log(4);
             return tmp;
         }
     },
