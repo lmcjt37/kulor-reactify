@@ -20,7 +20,7 @@ export default ({
             <p className={inputPrefix} style={{opacity: opacity}}>
                 {`${ label === 'RGB' ? label.toLowerCase() : '' }${prefix}`}
             </p>
-            <Input
+            <Input spellCheck="false"
                 {...{type, label, name, value, onFocus, onChange, onBlur, theme}} />
             <p className={inputSuffix} style={{opacity: opacity}}>{suffix}</p>
         </div>

@@ -25,7 +25,9 @@ const parseRgb = (rgb, type) => {
                 };
             }
         case "string":
-            if (rgb.a) {
+            if (rgb.a >= 0 && rgb.a < 1) {
+                if (rgb.a === 0) { rgb.a = 0.0; }
+                if (rgb.a === 1) { rgb.a = 1.0; }
                 return rgb.r + "," + rgb.g + "," + rgb.b + "," + rgb.a;
             } else {
                 return rgb.r + "," + rgb.g + "," + rgb.b;
@@ -43,7 +45,7 @@ const parseDecimal = (dec) => {
 
 const objectifyHsl = (data) => {
     const { hue, saturation, lightness, alpha } = data;
-    if (alpha === "1.0") {
+    if (alpha === 1) {
         return {
             h: hue,
             s: saturation,
@@ -54,22 +56,26 @@ const objectifyHsl = (data) => {
             h: hue,
             s: saturation,
             l: lightness,
-            a: alpha
+            a: alpha === 0 ? 0.0 : alpha
         };
     }
 };
 
 const convertRgb = (data) => {
     let rgb = parseRgb(data.rgb, "object");
+    let hasAlpha = false;
+    if (rgb.a >= 0 && rgb.a < 1) {
+        hasAlpha = true;
+    }
     return {
         "rgb": parseRgb(rgb, "string"),
-        "hex": rgb.a ? tinycolor(rgb).toHex8() : tinycolor(rgb).toHex(),
+        "hex": hasAlpha ? tinycolor(rgb).toHex8() : tinycolor(rgb).toHex(),
         "hue": parseDecimal(tinycolor(rgb).toHsl()["h"]),
         "saturation": parseDecimal(tinycolor(rgb).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
         "alpha": tinycolor(rgb).toHsl()["a"],
         "theme": tinycolor(rgb).isDark() ? "light" : "dark",
-        "bgColour": rgb.a ? tinycolor(rgb).toHex8() : tinycolor(rgb).toHex()
+        "bgColour": tinycolor(rgb).toRgbString()
     };
 };
 
@@ -82,21 +88,25 @@ const convertHex = (data) => {
         "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
         "alpha": tinycolor(data.hex).toHsl()["a"],
         "theme": tinycolor(data.hex).isDark() ? "light" : "dark",
-        "bgColour": data.hex
+        "bgColour": tinycolor(data.hex).toRgbString()
     };
 }
 
 const convertHsl = (data) => {
     let hsl = objectifyHsl(data);
+    let hasAlpha = false;
+    if (hsl.a >= 0 && hsl.a < 1) {
+        hasAlpha = true;
+    }
     return {
         "rgb": parseRgb(tinycolor(hsl).toRgb(), "string"),
-        "hex": hsl.a ? tinycolor(hsl).toHex8() : tinycolor(hsl).toHex(),
+        "hex": hasAlpha ? tinycolor(hsl).toHex8() : tinycolor(hsl).toHex(),
         "hue": data.hue,
         "saturation": data.saturation,
         "lightness": data.lightness,
         "alpha": data.alpha,
         "theme": tinycolor(hsl).isDark() ? "light" : "dark",
-        "bgColour": hsl.a ? tinycolor(hsl).toHex8() : tinycolor(hsl).toHex()
+        "bgColour": tinycolor(hsl).toRgbString()
     };
 };
 
@@ -110,7 +120,7 @@ const getColourObject = (color) => ({
     "lightness": parseDecimal(color.toHsl()["l"]),
     "alpha": 1.0,
     "theme": color.isDark() ? "light" : "dark",
-    "bgColour": color.toHex()
+    "bgColour": color.toRgbString()
 });
 
 helper = {
@@ -176,19 +186,13 @@ helper = {
             }
             // restrict section 4 to a digit-decimal-digit pattern
             if (commaCount === 3) {
-                console.log(1);
-                console.log("inc --> ", inc);
-                console.log("chr --> ", chr);
-                if (inc === 1 && chr.match(/[^\d]/gim).length != null && chr.match(/[^\d]/gim).length > 0) {
-                    console.log(2);
+                if (inc === 1 && chr.match(/[^\d]/gim) != null && chr.match(/[^\d]/gim).length > 0) {
                     tmp = tmp.substring(0, idx);
                 }
-                if (inc === 2 && chr.match(/[^\.]/gim).length != null && chr.match(/[^\.]/gim).length > 0) {
-                    console.log(3);
+                if (inc === 2 && chr.match(/[^\.]/gim) != null && chr.match(/[^\.]/gim).length > 0) {
                     tmp = tmp.substring(0, idx);
                 }
-                if (inc === 3 && chr.match(/[^\d]/gim).length != null && chr.match(/[^\d]/gim).length > 0) {
-                    console.log(4);
+                if (inc === 3 && chr.match(/[^\d]/gim) != null && chr.match(/[^\d]/gim).length > 0) {
                     tmp = tmp.substring(0, idx);
                 }
             }
