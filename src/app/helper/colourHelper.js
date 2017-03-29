@@ -26,9 +26,7 @@ const parseRgb = (rgb, type) => {
             }
         case "string":
             if (rgb.a >= 0 && rgb.a < 1) {
-                if (rgb.a === 0) { rgb.a = 0.0; }
-                if (rgb.a === 1) { rgb.a = 1.0; }
-                return rgb.r + "," + rgb.g + "," + rgb.b + "," + rgb.a;
+                return rgb.r + "," + rgb.g + "," + rgb.b + "," + parseFloatNumber(rgb.a);
             } else {
                 return rgb.r + "," + rgb.g + "," + rgb.b;
             }
@@ -41,6 +39,10 @@ const parseDecimal = (dec) => {
     } else {
         return Math.round((dec.toFixed(2)) * 100);
     }
+};
+
+const parseFloatNumber = (num) => {
+    return parseFloat(Math.round(num * 100) / 100).toFixed(1);
 };
 
 const objectifyHsl = (data) => {
