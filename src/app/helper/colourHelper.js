@@ -42,7 +42,12 @@ const parseDecimal = (dec) => {
 };
 
 const parseFloatNumber = (num) => {
-    return parseFloat(Math.round(num * 100) / 100).toFixed(1);
+    var val = num.toString();
+    if (val.split("").length === 3) {
+        return parseFloat(Math.round(num * 100) / 100).toFixed(1);
+    } else {
+        return parseFloat(Math.round(num * 100) / 100).toFixed(2);
+    }
 };
 
 const objectifyHsl = (data) => {
@@ -130,7 +135,7 @@ helper = {
     validateColours({type, rgb, hex}) {
         switch (type) {
             case "rgb":
-                return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\d+\,\s*\d+\,\s*\d+\,(\d\.\d))$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3}\s(\d\.\d))$/gim) !== null;
+                return rgb.match(/^(\d+\,\s*\d+\,\s*\d+)$|^(\d+\,\s*\d+\,\s*\d+\,(\d\.\d))$|^(\d+\,\s*\d+\,\s*\d+\,(\d\.\d\d))$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3})$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3}\s(\d\.\d))$|^(\s*\d{1,3}\s\d{1,3}\s\d{1,3}\s(\d\.\d\d))$/gim) !== null;
             case "hex":
                 if (hex.length === 3 || hex.length === 6 || hex.length === 8) {
                     return true;
@@ -160,8 +165,8 @@ helper = {
         // strips unwanted characters
         tmp = tmp.replace(/[^\w\,\.]|[rgb]/g, "");
         // prevents extra commas
-        if (tmp.substring(15, 16) === ",") {
-            tmp = tmp.substring(0, 15);
+        if (tmp.substring(16, 17) === ",") {
+            tmp = tmp.substring(0, 16);
         }
         // trims space (if exists) from conversion
         if (tmp.substring(0, 1) === " ") {
@@ -186,7 +191,7 @@ helper = {
                     inc = 0;
                 }
             }
-            // restrict section 4 to a digit-decimal-digit pattern
+            // restrict section 4 to a digit-decimal-digit-digit pattern
             if (commaCount === 3) {
                 if (inc === 1 && chr.match(/[^\d]/gim) != null && chr.match(/[^\d]/gim).length > 0) {
                     tmp = tmp.substring(0, idx);
@@ -197,9 +202,12 @@ helper = {
                 if (inc === 3 && chr.match(/[^\d]/gim) != null && chr.match(/[^\d]/gim).length > 0) {
                     tmp = tmp.substring(0, idx);
                 }
+                if (inc === 4 && chr.match(/[^\d]/gim) != null && chr.match(/[^\d]/gim).length > 0) {
+                    tmp = tmp.substring(0, idx);
+                }
             }
             // caps sections to 3 chars
-            if (commaCount === 3 && inc > 3) {
+            if (commaCount === 3 && inc > 4) {
                 tmp = tmp.substring(0, idx);
             }
         });
@@ -219,9 +227,9 @@ helper = {
             }
         }).join();
 
-        if (count >= 14) {
-            // sets limit to 15 with commas
-            return tmp.substring(0, 15);
+        if (count >= 15) {
+            // sets limit to 16 with commas
+            return tmp.substring(0, 16);
         } else if (tmp.indexOf(".") !== -1 && tmp.match(/\./g).length > 1) {
             // restrict fullstops
             return tmp.substring(0, tmp.length-1);

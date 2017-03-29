@@ -15,9 +15,9 @@ const sliders = {
         step: 1
     },
     alpha: {
-        min: 0.0,
-        max: 1.0,
-        step: 0.1
+        min: 0.00,
+        max: 1.00,
+        step: 0.01
     }
 }
 
