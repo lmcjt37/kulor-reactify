@@ -75,7 +75,7 @@ const convertRgb = (data) => {
         "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
         "alpha": tinycolor(rgb).toHsl()["a"],
         "theme": tinycolor(rgb).isDark() ? "light" : "dark",
-        "bgColour": tinycolor(rgb).toRgbString()
+        "bgColour": tinycolor(rgb).toHex()
     };
 };
 
@@ -88,7 +88,7 @@ const convertHex = (data) => {
         "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
         "alpha": tinycolor(data.hex).toHsl()["a"],
         "theme": tinycolor(data.hex).isDark() ? "light" : "dark",
-        "bgColour": tinycolor(data.hex).toRgbString()
+        "bgColour": data.hex
     };
 }
 
@@ -106,7 +106,7 @@ const convertHsl = (data) => {
         "lightness": data.lightness,
         "alpha": data.alpha,
         "theme": tinycolor(hsl).isDark() ? "light" : "dark",
-        "bgColour": tinycolor(hsl).toRgbString()
+        "bgColour": tinycolor(hsl).toHex()
     };
 };
 
@@ -120,7 +120,7 @@ const getColourObject = (color) => ({
     "lightness": parseDecimal(color.toHsl()["l"]),
     "alpha": 1.0,
     "theme": color.isDark() ? "light" : "dark",
-    "bgColour": color.toRgbString()
+    "bgColour": color.toHex()
 });
 
 helper = {

@@ -32,7 +32,7 @@ export default class App extends React.Component {
             alpha: 1.0,
             type: '',
             theme: 'light',
-            bgColour: 'rgba(91,50,86,1.0)',
+            bgColour: '5b3256',
             isOpen: false,
             isHandheld: null,
             isDialogActive: false
@@ -84,7 +84,7 @@ export default class App extends React.Component {
         }
 
         return (
-            <div className={ fullPageClasses } style={{backgroundColor: `${bgColour}`}}>
+            <div className={ fullPageClasses } style={{backgroundColor: `#${bgColour}`}}>
                 <Header {...{ anchor, image, headerClasses }} />
 
                 <GithubLink {...{ theme, bgColour }}/>
