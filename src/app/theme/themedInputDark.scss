@@ -23,8 +23,12 @@ $break-medium: 767px;
         width: 100%;
     }
 }
-.inputWrapper {
+.inputOuterWrapper {
     position: relative;
+}
+.inputInnerWrapper {
+    position: relative;
+    width: 90%;
 }
 .inputPrefix {
     color: rgba(64, 64, 64, 0.4);
@@ -43,4 +47,12 @@ $break-medium: 767px;
     right: 0;
     top: 3.6rem;
     transition: opacity 0.7s;
+}
+.inputCopy {
+    position: absolute;
+    right: 0;
+    top: 3.6rem;
+}
+.icon {
+    font-size: 3rem!important;
 }

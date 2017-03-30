@@ -4,9 +4,10 @@ import { IconButton } from 'react-toolbox/lib/button';
 export default ({
     icon,
     inverse,
-    onMouseUp
+    onMouseUp,
+    theme
 }) => {
     return (
-        <IconButton {...{icon, onMouseUp, inverse}} />
+        <IconButton {...{icon, onMouseUp, inverse, theme}} />
     );
 }
