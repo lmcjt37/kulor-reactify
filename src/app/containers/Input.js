@@ -37,6 +37,13 @@ export default class Inputs extends React.Component {
         });
     }
 
+    triggerToast(message) {
+        this.props.onStateChange({
+            showToast: true,
+            toastMessage: message
+        });
+    }
+
     getColourInputs() {
         const array = [];
         for (var prop in this.props.inputs) {
@@ -56,6 +63,8 @@ export default class Inputs extends React.Component {
                     onChange={() => this.handleChange(type)}
                     theme={this.getInputTheme(this.props.theme)}
                     opacity={this.props[`${type}Opacity`]}
+                    styling={this.props.theme}
+                    onToast={(message) => this.triggerToast(message)}
                     {...{prefix, suffix}} />
             );
         });
