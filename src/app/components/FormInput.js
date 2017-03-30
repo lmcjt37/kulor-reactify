@@ -33,6 +33,7 @@ export default ({
                     {`${ label === 'RGB' ? label.toLowerCase() : '' }${prefix}`}
                 </p>
                 <Input
+                    spellCheck="false"
                     id={`${name}InputId`}
                     {...{type, label, name, value, onFocus, onChange, onBlur, theme}} />
                 <p className={inputSuffix} style={{opacity: opacity}}>{suffix}</p>

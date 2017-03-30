@@ -7,6 +7,7 @@ Includes:
 * Randomisation
 * Lighten (+10%)
 * Darken (-10%)
+* Handles alpha and conversion
 * Handy Help Hints to get you going
 * Quickly copy the input for wherever it's needed
 * More to come...
@@ -28,7 +29,6 @@ Working project: http://lmcjt.com/kulor
 - Github corner link was created by [Tim Holman](http://tholman.com/github-corners/)
 
 ### Pipeline
-- Add alpha
 - lighten/darken percentage +/-
 - Colour palette for storing colours from the session
 - Ability to get different colour combos (triad/complementary/tetrad)
