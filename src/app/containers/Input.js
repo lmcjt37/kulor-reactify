@@ -78,7 +78,14 @@ export default class Inputs extends React.Component {
     }
 
     componentDidMount() {
-        document.querySelectorAll('input').forEach(input => this[`${input.name}`] = input);
+        let forEach = (array, callback, scope) => {
+            for (var i = 0; i < array.length; i++) {
+                callback.call(scope, i, array[i]);
+            }
+        };
+
+        let nodes = document.querySelectorAll('input');
+        forEach(nodes, input => this[`${input.name}`] = input);
     }
 
     render () {
