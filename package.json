@@ -27,7 +27,7 @@
     "babel-preset-es2015": "~6.1.4",
     "babel-preset-react": "~6.1.4",
     "babel-preset-react-hmre": "^1.1.1",
-    "babel-preset-stage-0": "^6.18.0",
+    "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
@@ -72,7 +72,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha test/**/*.spec.js -r test/setup.js -r babel-register -r ignore-styles -R nyan"
+    "test": "mocha --opts test/mocha.opts test/**/*.spec.js"
   },
   "dependencies": {}
 }

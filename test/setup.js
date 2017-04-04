@@ -21,8 +21,6 @@ global.navigator = {
     userAgent: 'node.js'
 };
 
-documentRef = document;
-
 global.chai = require('chai');
 global.chai.use(require('chai-as-promised'));
 global.should = chai.should();
