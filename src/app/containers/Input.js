@@ -78,6 +78,8 @@ export default class Inputs extends React.Component {
     }
 
     componentDidMount() {
+        // Fixes NodeList forEach issue
+        // https://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
         let forEach = (array, callback, scope) => {
             for (var i = 0; i < array.length; i++) {
                 callback.call(scope, i, array[i]);
