@@ -22,7 +22,7 @@ describe("Tests for app.js",() => {
 
         // expect(wrapper.type()).to.equal('div');
 
-        // expect(wrapper.prop('style')).to.deep.equal({ backgroundColor: '#5B3256' });
+        // expect(wrapper.prop('style')).to.deep.equal({ backgroundColor: '#5b3256' });
 
         // console.log(wrapper.props().children);
 
