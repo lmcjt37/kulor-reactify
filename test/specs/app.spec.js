@@ -1,15 +1,11 @@
 /* Remember: https://mochajs.org/#arrow-functions*/
 import React from 'react';
-import { mount, render, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import App from '../../src/app/App';
 
 describe("Tests for app.js",() => {
-
-    beforeEach(() => {});
-
-    afterEach(() => {});
 
     describe("and we check initial", () => {
 
@@ -69,8 +65,6 @@ describe("Tests for app.js",() => {
             let instance = wrapper.instance();
 
             let handleResizeChangeSpy = sinon.spy(instance, 'handleResizeChange');
-
-            wrapper.update();
 
             instance.handleResizeChange();
 
