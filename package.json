@@ -74,7 +74,8 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "nyc mocha --opts test/mocha.opts test/**/*.spec.js"
+    "test": "nyc --reporter=html mocha --opts test/mocha.opts test/**/*.spec.js",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha --opts test/mocha.opts test/**/*.spec.js"
   },
   "dependencies": {}
 }
