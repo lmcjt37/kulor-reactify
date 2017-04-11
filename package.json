@@ -46,6 +46,7 @@
     "mocha": "^3.2.0",
     "node-sass": "~3.8.0",
     "normalize.css": "~4.2.0",
+    "nyc": "^10.2.0",
     "path": "^0.12.7",
     "postcss-loader": "~0.10.1",
     "react": "^15.4.2",
@@ -73,7 +74,7 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "mocha --opts test/mocha.opts test/**/*.spec.js"
+    "test": "nyc mocha --opts test/mocha.opts test/**/*.spec.js"
   },
   "dependencies": {}
 }
