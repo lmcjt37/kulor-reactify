@@ -1,3 +1,2 @@
 --require test/setup.js
---require ignore-styles
---compilers js:babel-core/register
+--compilers js:babel-core/register,js:./test/styles-compiler
