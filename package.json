@@ -70,7 +70,7 @@
     "webpack-hot-middleware": "~2.12.2"
   },
   "scripts": {
-    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config",
+    "build:dev": "npm run test:coverage && cross-env NODE_ENV=development webpack --config webpack.config",
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
