@@ -1,7 +1,7 @@
 {
   "name": "kulor-reactify",
   "description": "Tool for converting colours",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "author": {
     "name": "Luke Taylor",
     "url": "http://lmcjt.com"
@@ -74,8 +74,8 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "nyc --reporter=html mocha --opts test/mocha.opts test/**/*.spec.js",
-    "test:coverage": "nyc --reporter=html --reporter=text mocha --opts test/mocha.opts test/**/*.spec.js"
+    "test": "NODE_PATH='./src/app' nyc --reporter=html mocha --opts test/mocha.opts test/**/*.spec.js",
+    "test:coverage": "NODE_PATH='./src/app' nyc --reporter=html --reporter=text mocha --opts test/mocha.opts test/**/*.spec.js"
   },
   "dependencies": {}
 }

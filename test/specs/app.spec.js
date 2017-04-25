@@ -3,16 +3,16 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import UtilsHelper from "../../src/app/helper/utilsHelper";
-import App from '../../src/app/App';
-import Header from '../../src/app/containers/Header';
-import GithubLink from '../../src/app/containers/GithubLink';
-import ButtonBar from '../../src/app/containers/ButtonBar';
-import Hints from '../../src/app/containers/Hints';
-import Inputs from '../../src/app/containers/Input';
-import Nav from '../../src/app/containers/Nav';
-import Sliders from '../../src/app/containers/Slider';
-import Toast from '../../src/app/containers/Toast';
+import UtilsHelper from "helper/utilsHelper";
+import App from 'App';
+import Header from 'containers/Header';
+import GithubLink from 'containers/GithubLink';
+import ButtonBar from 'containers/ButtonBar';
+import Hints from 'containers/Hints';
+import Inputs from 'containers/Input';
+import Nav from 'containers/Nav';
+import Sliders from 'containers/Slider';
+import Toast from 'containers/Toast';
 
 describe("Tests for app.js", () => {
 
