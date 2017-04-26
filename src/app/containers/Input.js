@@ -10,36 +10,25 @@ export default class Inputs extends React.Component {
         super(props);
     }
 
-    handleFocus(type) {
+    handleFocus(input) {
         this.props.onStateChange({
-            [`${type}Opacity`] : 1
+            [`${input}Opacity`] : 1
         });
-
     }
 
-    handleBlur(type) {
-        const {value, name} = this[`${type}`];
-
+    handleBlur(input, value) {
         if (value === '' || value.length === 0 || value < 0) {
             this.props.onStateChange({
-                [`${name}Opacity`] : 0
+                [`${input}Opacity`] : 0
             });
-      }
+        }
     }
 
-    handleChange(type) {
-        //TODO: this[`${type}`] is undefined
-
-        console.log("handleChange");
-        console.log(this);
-        // console.log(this[`${type}`]);
-
-        const {value, name} = this[`${type}`];
-        const trimType = `trim${name.charAt(0).toUpperCase()}${name.slice(1)}`;
-
+    handleChange(input, value) {
+        const trimType = `trim${input.charAt(0).toUpperCase()}${input.slice(1)}`;
         this.props.onStateChange({
-            [name]: ColourHelper[trimType](value),
-            'type': name
+            [input]: ColourHelper[trimType](value),
+            'type': input
         });
     }
 
@@ -64,9 +53,9 @@ export default class Inputs extends React.Component {
                     label={type.toUpperCase()}
                     name={type}
                     value={this.props[type]}
-                    onFocus={() => this.handleFocus(type)}
-                    onBlur={() => this.handleBlur(type)}
-                    onChange={() => this.handleChange(type)}
+                    onFocus={this.handleFocus.bind(this, type)}
+                    onBlur={this.handleBlur.bind(this, type)}
+                    onChange={this.handleChange.bind(this, type)}
                     theme={this.getInputTheme(this.props.theme)}
                     opacity={this.props[`${type}Opacity`]}
                     styling={this.props.theme}
