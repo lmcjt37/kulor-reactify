@@ -74,6 +74,9 @@ const convertRgb = (data) => {
     if (rgb.a >= 0 && rgb.a < 1) {
         hasAlpha = true;
     }
+    // if (hasAlpha) {
+    //     console.log(getTrueBrightnessWithAlpha(rgb));
+    // }
     return {
         "rgb": parseRgb(rgb, "string"),
         "hex": hasAlpha ? tinycolor(rgb).toHex8() : tinycolor(rgb).toHex(),
@@ -129,6 +132,19 @@ const getColourObject = (color) => ({
     "theme": color.isDark() ? "light" : "dark",
     "bgColour": color.toHex()
 });
+
+// const getTrueBrightnessWithAlpha = (color) => {
+//     console.log("getTrueBrightnessWithAlpha");
+//     console.log(color);
+//     const old = parseRgb(color.toRgb(), "object");
+//     console.log(old);
+//
+//     const newR = (old.r - (1 - old.a) * 255) / old.a;
+//     const newG = (old.g - (1 - old.a) * 255) / old.a;
+//     const newB = (old.b - (1 - old.a) * 255) / old.a;
+//
+//     return tinycolor({ r: newR, g: newG, b: newB }).isDark();
+// }
 
 helper = {
 

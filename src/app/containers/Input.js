@@ -28,6 +28,12 @@ export default class Inputs extends React.Component {
     }
 
     handleChange(type) {
+        //TODO: this[`${type}`] is undefined
+
+        console.log("handleChange");
+        console.log(this);
+        // console.log(this[`${type}`]);
+
         const {value, name} = this[`${type}`];
         const trimType = `trim${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 
