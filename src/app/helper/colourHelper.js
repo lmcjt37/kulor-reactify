@@ -1,7 +1,7 @@
 const tinycolor = require("tinycolor2");
 let helper = {};
 
-const parseRgb = (rgb, type) => {
+const parseRgb = (rgb, type, showAlpha) => {
     switch(type) {
         case "object":
             let tmp = helper.trimRgb(rgb);
@@ -27,6 +27,8 @@ const parseRgb = (rgb, type) => {
         case "string":
             if (rgb.a >= 0 && rgb.a < 1) {
                 return rgb.r + "," + rgb.g + "," + rgb.b + "," + parseFloatNumber(rgb.a);
+            } else if(rgb.a === 1 && showAlpha) {
+                return rgb.r + "," + rgb.g + "," + rgb.b + ",1.0";
             } else {
                 return rgb.r + "," + rgb.g + "," + rgb.b;
             }
@@ -74,9 +76,6 @@ const convertRgb = (data) => {
     if (rgb.a >= 0 && rgb.a < 1) {
         hasAlpha = true;
     }
-    // if (hasAlpha) {
-    //     console.log(getTrueBrightnessWithAlpha(rgb));
-    // }
     return {
         "rgb": parseRgb(rgb, "string"),
         "hex": hasAlpha ? tinycolor(rgb).toHex8() : tinycolor(rgb).toHex(),
@@ -84,12 +83,13 @@ const convertRgb = (data) => {
         "saturation": parseDecimal(tinycolor(rgb).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(rgb).toHsl()["l"]),
         "alpha": tinycolor(rgb).toHsl()["a"],
-        "theme": tinycolor(rgb).isDark() ? "light" : "dark",
-        "bgColour": tinycolor(rgb).toHex()
+        "theme": getTrueBrightnessWithAlpha(rgb) ? "light" : "dark",
+        "bgColour": parseRgb(rgb, "string", true)
     };
 };
 
 const convertHex = (data) => {
+
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
@@ -97,8 +97,8 @@ const convertHex = (data) => {
         "saturation": parseDecimal(tinycolor(data.hex).toHsl()["s"]),
         "lightness": parseDecimal(tinycolor(data.hex).toHsl()["l"]),
         "alpha": tinycolor(data.hex).toHsl()["a"],
-        "theme": tinycolor(data.hex).isDark() ? "light" : "dark",
-        "bgColour": data.hex
+        "theme": getTrueBrightnessWithAlpha(tinycolor(data.hex).toRgb()) ? "light" : "dark",
+        "bgColour": parseRgb(tinycolor(data.hex).toRgb(), "string", true)
     };
 }
 
@@ -115,8 +115,8 @@ const convertHsl = (data) => {
         "saturation": data.saturation,
         "lightness": data.lightness,
         "alpha": data.alpha,
-        "theme": tinycolor(hsl).isDark() ? "light" : "dark",
-        "bgColour": tinycolor(hsl).toHex()
+        "theme": getTrueBrightnessWithAlpha(tinycolor(hsl).toRgb()) ? "light" : "dark",
+        "bgColour": parseRgb(tinycolor(hsl).toRgb(), "string", true)
     };
 };
 
@@ -129,22 +129,25 @@ const getColourObject = (color) => ({
     "saturation": parseDecimal(color.toHsl()["s"]),
     "lightness": parseDecimal(color.toHsl()["l"]),
     "alpha": 1.0,
-    "theme": color.isDark() ? "light" : "dark",
-    "bgColour": color.toHex()
+    "theme": getTrueBrightnessWithAlpha(color) ? "light" : "dark",
+    "bgColour": parseRgb(color.toRgb(), "string", true)
 });
 
-// const getTrueBrightnessWithAlpha = (color) => {
-//     console.log("getTrueBrightnessWithAlpha");
-//     console.log(color);
-//     const old = parseRgb(color.toRgb(), "object");
-//     console.log(old);
-//
-//     const newR = (old.r - (1 - old.a) * 255) / old.a;
-//     const newG = (old.g - (1 - old.a) * 255) / old.a;
-//     const newB = (old.b - (1 - old.a) * 255) / old.a;
-//
-//     return tinycolor({ r: newR, g: newG, b: newB }).isDark();
-// }
+const getTrueBrightnessWithAlpha = (color) => {
+    let old = color;
+    if (typeof color !== 'object') {
+        old = parseRgb(tinycolor(color).toRgb(), "object");
+    }
+    const newR = (old.r * old.a) + (255 * (1 - old.a));
+    const newG = (old.g * old.a) + (255 * (1 - old.a));
+    const newB = (old.b * old.a) + (255 * (1 - old.a));
+    const colorObj = {
+        r: Math.round(newR),
+        g: Math.round(newG),
+        b: Math.round(newB)
+    };
+    return tinycolor(colorObj).isDark();
+}
 
 helper = {
 
