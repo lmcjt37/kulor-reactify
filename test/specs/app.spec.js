@@ -33,7 +33,7 @@ describe("Tests for app.js", () => {
                 alpha: 1,
                 type: '',
                 theme: 'light',
-                bgColour: '5b3256',
+                bgColour: '91,50,86,1.0',
                 isOpen: false,
                 isHandheld: false,
                 isDialogActive: false,
@@ -49,7 +49,7 @@ describe("Tests for app.js", () => {
 
             expect(wrapper.type()).to.equal('div');
 
-            expect(wrapper.prop('style')).to.deep.equal({ backgroundColor: '#5b3256' });
+            expect(wrapper.prop('style')).to.deep.equal({ backgroundColor: 'rgba(91,50,86,1.0)' });
 
             expect(wrapper.find(ButtonBar)).to.have.lengthOf(0);
 
@@ -110,7 +110,7 @@ describe("Tests for app.js", () => {
                 alpha: 1,
                 type: '',
                 theme: 'light',
-                bgColour: '5b3256',
+                bgColour: '91,50,86,1.0',
                 isOpen: false,
                 isHandheld: true,
                 isDialogActive: false,
@@ -151,7 +151,7 @@ describe("Tests for app.js", () => {
                 alpha: 1,
                 type: '',
                 theme: 'light',
-                bgColour: '5b3256',
+                bgColour: '91,50,86,1.0',
                 isOpen: false,
                 isHandheld: false,
                 isDialogActive: false,
