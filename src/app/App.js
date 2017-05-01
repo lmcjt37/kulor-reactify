@@ -80,7 +80,7 @@ export default class App extends React.Component {
 
 
         let getNavigation = () => {
-            if (isHandheld) {
+            if (isHandheld) {                
                 return <ButtonBar {...{ hex, features, buttonBarClasses }} onStateChange={this.handleStateChange} />;
             } else {
                 return <Nav {...{ hex, features, isOpen }} onStateChange={this.handleStateChange} />
