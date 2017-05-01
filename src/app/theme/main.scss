@@ -16,11 +16,11 @@ $break-medium: 767px;
     position: relative;
     width: 50%;
     @media screen and (max-width: $break-medium) {
-        padding-top: 22%;
+        padding-top: 25%;
         width: 80%;
     }
     @media screen and (max-width: $break-small) {
-        padding-top: 30%;
+        padding-top: 35%;
         width: 85%;
     }
 }
