@@ -5,7 +5,7 @@ const parseRgb = (rgb, type, showAlpha) => {
     switch(type) {
         case "object":
             let tmp = helper.trimRgb(rgb);
-            if (rgb.indexOf(",") > -1) {
+            if (rgb.indexOf(",") !== -1) {
                 tmp = tmp.split(",");
             } else {
                 tmp = tmp.split(" ");
