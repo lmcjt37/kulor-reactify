@@ -73,31 +73,35 @@ describe("Tests for app.js", () => {
 
     describe("and we check function", () => {
 
-        const utilsHelperGetScreenSizeStub = sinon.stub(UtilsHelper, 'getScreenSize');
+        let wrapper, instance;
 
-        it("componentDidMount", () => {
+        beforeEach(() => {
 
-            let componentDidMountSpy = sinon.spy(App.prototype, 'componentDidMount');
+            wrapper = mount(<App />);
 
-            const wrapper = mount(<App />);
+            instance = wrapper.instance();
 
-            expect(componentDidMountSpy.calledOnce).to.equal(true);
+            sinon.spy(instance, 'handleResizeChange');
+
+            sinon.stub(UtilsHelper, 'getScreenSize');
+
+        });
+
+        afterEach(() => {
+
+            UtilsHelper.getScreenSize.restore();
+
+            instance.handleResizeChange.restore();
 
         });
 
         it("handleResizeChange - small device", () => {
 
-            const wrapper = mount(<App />);
-
-            let instance = wrapper.instance();
-
-            let handleResizeChangeSpy = sinon.spy(instance, 'handleResizeChange');
-
-            utilsHelperGetScreenSizeStub.returns({ isHandheld: true });
+            UtilsHelper.getScreenSize.returns({ isHandheld: true });
 
             instance.handleResizeChange();
 
-            expect(handleResizeChangeSpy.calledOnce).to.equal(true);
+            expect(instance.handleResizeChange.calledOnce).to.equal(true);
 
             expect(wrapper.state()).to.deep.equal({
                 rgb: '91,50,86',
@@ -128,17 +132,11 @@ describe("Tests for app.js", () => {
 
         it("handleResizeChange - large device", () => {
 
-            const wrapper = mount(<App />);
-
-            let instance = wrapper.instance();
-
-            let handleResizeChangeSpy = sinon.spy(instance, 'handleResizeChange');
-
-            utilsHelperGetScreenSizeStub.returns({ isHandheld: false });
+            UtilsHelper.getScreenSize.returns({ isHandheld: false });
 
             instance.handleResizeChange();
 
-            expect(handleResizeChangeSpy.calledOnce).to.equal(true);
+            expect(instance.handleResizeChange.calledOnce).to.equal(true);
 
             expect(wrapper.state()).to.deep.equal({
                 rgb: '91,50,86',
