@@ -204,4 +204,299 @@ describe("Tests for helper/colourHelper.js", () => {
 
     });
 
+    describe("and converts colours, for", () => {
+
+        let spy;
+
+        beforeEach(() => {
+
+            spy = sinon.spy();
+
+        });
+
+        afterEach(() => {
+
+            spy.reset();
+
+        });
+
+        describe("rgb", () => {
+
+            it.skip("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    rgb: "91,50,86",
+                    type: "rgb"
+                }));
+
+                // TODO: should be fixed when merged with PR #50
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "91,50,86")
+                    .and(sinon.match.has("hex", "5b3256"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "91,50,86,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    rgb: "91,50,86,0.5",
+                    type: "rgb"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "91,50,86,0.5")
+                    .and(sinon.match.has("hex", "5b325680"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "91,50,86,0.5"))
+                );
+
+            });
+
+        });
+
+        describe("hex", () => {
+
+            it("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hex: "5b3256",
+                    type: "hex"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "91,50,86")
+                    .and(sinon.match.has("hex", "5b3256"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "91,50,86,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hex: "5b325680",
+                    type: "hex"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "91,50,86,0.50")
+                    .and(sinon.match.has("hex", "5b325680"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5019607843137255))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "91,50,86,0.50"))
+                );
+
+            });
+
+        });
+
+        describe("hue", () => {
+
+            it("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 1,
+                    type: "hue"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87")
+                    .and(sinon.match.has("hex", "5c3357"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "92,51,87,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 0.5,
+                    type: "hue"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87,0.5")
+                    .and(sinon.match.has("hex", "5c335780"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "92,51,87,0.5"))
+                );
+
+            });
+
+        });
+
+        describe("saturation", () => {
+
+            it("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 1,
+                    type: "saturation"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87")
+                    .and(sinon.match.has("hex", "5c3357"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "92,51,87,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 0.5,
+                    type: "saturation"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87,0.5")
+                    .and(sinon.match.has("hex", "5c335780"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "92,51,87,0.5"))
+                );
+
+            });
+
+        });
+
+        describe("lightness", () => {
+
+            it("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 1,
+                    type: "lightness"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87")
+                    .and(sinon.match.has("hex", "5c3357"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "92,51,87,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 0.5,
+                    type: "lightness"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87,0.5")
+                    .and(sinon.match.has("hex", "5c335780"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "92,51,87,0.5"))
+                );
+
+            });
+
+        });
+
+        describe("alpha", () => {
+
+            it("without alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 1,
+                    type: "alpha"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87")
+                    .and(sinon.match.has("hex", "5c3357"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 1))
+                    .and(sinon.match.has("theme", "light"))
+                    .and(sinon.match.has("bgColour", "92,51,87,1.0"))
+                );
+
+            });
+
+            it("with alpha", () => {
+
+                spy(ColourHelper.convertColours({
+                    hue: 307,
+                    lightness: 28,
+                    saturation: 29,
+                    alpha: 0.5,
+                    type: "alpha"
+                }));
+
+                sinon.assert.calledWith(spy, sinon.match.has("rgb", "92,51,87,0.5")
+                    .and(sinon.match.has("hex", "5c335780"))
+                    .and(sinon.match.has("hue", 307))
+                    .and(sinon.match.has("saturation", 29))
+                    .and(sinon.match.has("lightness", 28))
+                    .and(sinon.match.has("alpha", 0.5))
+                    .and(sinon.match.has("theme", "dark"))
+                    .and(sinon.match.has("bgColour", "92,51,87,0.5"))
+                );
+
+            });
+
+        });
+
+    });
+
 });
