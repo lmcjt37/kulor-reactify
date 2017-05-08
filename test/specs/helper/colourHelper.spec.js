@@ -68,9 +68,22 @@ describe("Tests for helper/colourHelper.js", () => {
 
     describe("and handles button functions when clicked, for", () => {
 
+        let spy;
+
+        beforeEach(() => {
+
+            spy = sinon.spy();
+
+        });
+
+        afterEach(() => {
+
+            spy.reset();
+
+        });
+
         it("randomise", () => {
 
-            let spy = sinon.spy();
             spy(ColourHelper.randomise());
 
             sinon.assert.calledWith(spy, sinon.match.has("rgb", sinon.match.string)
@@ -89,7 +102,6 @@ describe("Tests for helper/colourHelper.js", () => {
 
         it("lighten", () => {
 
-            let spy = sinon.spy();
             spy(ColourHelper.lighten("5b3256"));
 
             sinon.assert.calledWith(spy, sinon.match.has("rgb", "124,68,117")
@@ -108,7 +120,6 @@ describe("Tests for helper/colourHelper.js", () => {
 
         it("darken", () => {
 
-            let spy = sinon.spy();
             spy(ColourHelper.darken("5b3256"));
 
             sinon.assert.calledWith(spy, sinon.match.has("rgb", "58,32,55")
@@ -122,6 +133,72 @@ describe("Tests for helper/colourHelper.js", () => {
                 .and(sinon.match.has("theme", "light"))
                 .and(sinon.match.has("bgColour", "58,32,55,1.0"))
             );
+
+        });
+
+    });
+
+    describe("and trims correctly, for", () => {
+
+        it("rgb", () => {
+
+            expect(ColourHelper.trimRgb("123 123 123")).to.equal("123,123,123");
+
+            // bug identified here
+            // This is a bug where 3 characters allows the fullstop and 2 characters doesn't
+            expect(ColourHelper.trimRgb("123.")).to.equal("123,.");
+
+            expect(ColourHelper.trimRgb("rgb(123,123,123)")).to.equal("123,123,123");
+
+            // bug identified here
+            // not excluding all unwanted characters
+            // expect(ColourHelper.trimRgb("rgba(123,123,123)")).to.equal("123,123,123");
+
+            expect(ColourHelper.trimRgb(",")).to.equal("");
+
+            // bug identified here
+            // shouldn't allow initial fullstop
+            // expect(ColourHelper.trimRgb(".")).to.equal("");
+
+            expect(ColourHelper.trimRgb("123,123,123,0.9,")).to.equal("123,123,123,0.9");
+
+            expect(ColourHelper.trimRgb("123,123,123,1.")).to.equal("123,123,123,1");
+
+            expect(ColourHelper.trimRgb("123,123,123,,")).to.equal("123,123,123,");
+
+            // bug identified here
+            // shouldn't allow initial space or replace space with comma
+            // expect(ColourHelper.trimRgb(" ")).to.equal(",");
+
+            expect(ColourHelper.trimRgb("1231")).to.equal("123,1");
+
+            expect(ColourHelper.trimRgb("123,1231")).to.equal("123,123,1");
+
+            expect(ColourHelper.trimRgb("123,123,1230")).to.equal("123,123,123,0");
+
+            expect(ColourHelper.trimRgb("256")).to.equal("25");
+
+            expect(ColourHelper.trimRgb("255,256")).to.equal("255,25");
+
+            expect(ColourHelper.trimRgb("255,255,256")).to.equal("255,255,25");
+
+            // bug identified here
+            // zeros shouldn't be allowed in first 3 sections
+            // expect(ColourHelper.trimRgb("255,255,0")).to.equal("255,255,0");
+
+        });
+
+        it("hex", () => {
+
+            expect(ColourHelper.trimHex("5b3256")).to.equal("5b3256");
+
+            expect(ColourHelper.trimHex("#5b3256")).to.equal("5b3256");
+
+            expect(ColourHelper.trimHex("5b3256cc")).to.equal("5b3256cc");
+
+            expect(ColourHelper.trimHex("5b3256cc0")).to.equal("5b3256cc");
+
+            expect(ColourHelper.trimHex("ghijklmnopqrstuvwxyz")).to.equal("");
 
         });
 
