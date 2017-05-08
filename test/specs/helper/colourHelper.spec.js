@@ -222,14 +222,13 @@ describe("Tests for helper/colourHelper.js", () => {
 
         describe("rgb", () => {
 
-            it.skip("without alpha", () => {
+            it("without alpha", () => {
 
                 spy(ColourHelper.convertColours({
                     rgb: "91,50,86",
                     type: "rgb"
                 }));
 
-                // TODO: should be fixed when merged with PR #50
                 sinon.assert.calledWith(spy, sinon.match.has("rgb", "91,50,86")
                     .and(sinon.match.has("hex", "5b3256"))
                     .and(sinon.match.has("hue", 307))
