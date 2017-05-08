@@ -20,7 +20,7 @@ describe("Tests for app.js", () => {
 
         it("state object", () => {
 
-            const wrapper = mount(<App />);
+            const wrapper = shallow(<App />);
 
             expect(wrapper.state()).to.deep.equal({
                 rgb: '91,50,86',
@@ -77,7 +77,7 @@ describe("Tests for app.js", () => {
 
         beforeEach(() => {
 
-            wrapper = mount(<App />);
+            wrapper = shallow(<App />);
 
             instance = wrapper.instance();
 
