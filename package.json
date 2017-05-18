@@ -74,8 +74,8 @@
     "build:prod": "npm run test && cross-env NODE_ENV=production webpack --config webpack.config",
     "dev": "npm run build:dev && npm start",
     "start": "node server",
-    "test": "NODE_PATH='./src/app' nyc --reporter=html mocha --opts test/mocha.opts test/**/*.spec.js",
-    "test:coverage": "NODE_PATH='./src/app' nyc --reporter=html --reporter=text mocha --opts test/mocha.opts test/**/*.spec.js"
+    "test": "NODE_PATH='./src/app' nyc --reporter=html mocha --opts test/mocha.opts --recursive",
+    "test:coverage": "NODE_PATH='./src/app' nyc --reporter=html --reporter=text mocha --opts test/mocha.opts --recursive"
   },
   "dependencies": {}
 }

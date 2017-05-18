@@ -5,12 +5,12 @@ const parseRgb = (rgb, type, showAlpha) => {
     switch(type) {
         case "object":
             let tmp = helper.trimRgb(rgb);
-            if (rgb.indexOf(",") > -1) {
+            if (rgb.indexOf(",") !== -1) {
                 tmp = tmp.split(",");
             } else {
                 tmp = tmp.split(" ");
             }
-            if (tmp[3]) {
+            if (tmp.length > 3) {
                 return {
                     r: tmp[0],
                     g: tmp[1],
@@ -21,13 +21,14 @@ const parseRgb = (rgb, type, showAlpha) => {
                 return {
                     r: tmp[0],
                     g: tmp[1],
-                    b: tmp[2]
+                    b: tmp[2],
+                    a: 1
                 };
             }
         case "string":
             if (rgb.a >= 0 && rgb.a < 1) {
                 return rgb.r + "," + rgb.g + "," + rgb.b + "," + parseFloatNumber(rgb.a);
-            } else if(rgb.a === 1 && showAlpha) {
+            } else if (showAlpha && rgb.a === 1) {
                 return rgb.r + "," + rgb.g + "," + rgb.b + ",1.0";
             } else {
                 return rgb.r + "," + rgb.g + "," + rgb.b;
@@ -73,7 +74,7 @@ const objectifyHsl = (data) => {
 const convertRgb = (data) => {
     let rgb = parseRgb(data.rgb, "object");
     let hasAlpha = false;
-    if (rgb.a >= 0 && rgb.a < 1) {
+    if (rgb.a && rgb.a >= 0 && rgb.a < 1) {
         hasAlpha = true;
     }
     return {
@@ -89,7 +90,6 @@ const convertRgb = (data) => {
 };
 
 const convertHex = (data) => {
-
     return {
         "rgb": parseRgb(tinycolor(data.hex).toRgb(), "string"),
         "hex": data.hex,
@@ -105,7 +105,7 @@ const convertHex = (data) => {
 const convertHsl = (data) => {
     let hsl = objectifyHsl(data);
     let hasAlpha = false;
-    if (hsl.a >= 0 && hsl.a < 1) {
+    if (hsl.a && hsl.a >= 0 && hsl.a < 1) {
         hasAlpha = true;
     }
     return {
