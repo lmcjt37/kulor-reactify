@@ -205,6 +205,9 @@ helper = {
                     commaCount++;
                     inc = 0;
                 }
+                if (inc === 1 && chr === "0") {
+                    tmp = tmp.substring(0,idx);
+                }
                 if (inc > 3 && chr !== ",") {
                     tmp = tmp.substring(0,idx) + "," + tmp.substring(idx);
                     inc = 0;

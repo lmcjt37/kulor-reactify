@@ -182,9 +182,13 @@ describe("Tests for helper/colourHelper.js", () => {
 
             expect(ColourHelper.trimRgb("255,255,256")).to.equal("255,255,25");
 
-            // bug identified here
-            // zeros shouldn't be allowed in first 3 sections
-            // expect(ColourHelper.trimRgb("255,255,0")).to.equal("255,255,0");
+            expect(ColourHelper.trimRgb("0")).to.equal("");
+
+            expect(ColourHelper.trimRgb("255,0")).to.equal("255,");
+
+            expect(ColourHelper.trimRgb("255,255,0")).to.equal("255,255,");
+            
+            expect(ColourHelper.trimRgb("255,255,255,0")).to.equal("255,255,255,0");
 
         });
 
