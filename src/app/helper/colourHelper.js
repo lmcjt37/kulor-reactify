@@ -201,12 +201,16 @@ helper = {
         arr.forEach((chr, idx) => {
             inc++;
             if (commaCount < 3) {
-                if(chr === ",") {
+                if (chr === ",") {
                     commaCount++;
                     inc = 0;
                 }
                 if (inc === 1 && chr === "0") {
                     tmp = tmp.substring(0,idx);
+                }
+                if (chr === ".") {
+                    tmp = tmp.substring(0,idx);
+                    inc = 0;
                 }
                 if (inc > 3 && chr !== ",") {
                     tmp = tmp.substring(0,idx) + "," + tmp.substring(idx);

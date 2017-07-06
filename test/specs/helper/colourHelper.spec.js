@@ -144,10 +144,6 @@ describe("Tests for helper/colourHelper.js", () => {
 
             expect(ColourHelper.trimRgb("123 123 123")).to.equal("123,123,123");
 
-            // bug identified here
-            // This is a bug where 3 characters allows the fullstop and 2 characters doesn't
-            expect(ColourHelper.trimRgb("123.")).to.equal("123,.");
-
             expect(ColourHelper.trimRgb("rgb(123,123,123)")).to.equal("123,123,123");
 
             // bug identified here
@@ -156,9 +152,17 @@ describe("Tests for helper/colourHelper.js", () => {
 
             expect(ColourHelper.trimRgb(",")).to.equal("");
 
-            // bug identified here
-            // shouldn't allow initial fullstop
-            // expect(ColourHelper.trimRgb(".")).to.equal("");
+            expect(ColourHelper.trimRgb(".")).to.equal("");
+
+            expect(ColourHelper.trimRgb("123.")).to.equal("123");
+
+            expect(ColourHelper.trimRgb("123,123.")).to.equal("123,123");
+
+            expect(ColourHelper.trimRgb("123,123,123.")).to.equal("123,123,123");
+
+            expect(ColourHelper.trimRgb("123,123,123,.")).to.equal("123,123,123,");
+
+            expect(ColourHelper.trimRgb("123,123,123,0.5")).to.equal("123,123,123,0.5");
 
             expect(ColourHelper.trimRgb("123,123,123,0.9,")).to.equal("123,123,123,0.9");
 
@@ -187,7 +191,7 @@ describe("Tests for helper/colourHelper.js", () => {
             expect(ColourHelper.trimRgb("255,0")).to.equal("255,");
 
             expect(ColourHelper.trimRgb("255,255,0")).to.equal("255,255,");
-            
+
             expect(ColourHelper.trimRgb("255,255,255,0")).to.equal("255,255,255,0");
 
         });
