@@ -177,6 +177,8 @@ helper = {
         let tmp = JSON.stringify(colour);
         //remove initial comma
         tmp = tmp.replace(/^\",/g, "");
+        //remove initial space
+        tmp = tmp.replace(/^\"\s/g, "");
         //replaces space delimatation with commas
         if (tmp.indexOf(",") === -1) {
             tmp = tmp.replace(/\s/g, ",");
