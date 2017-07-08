@@ -182,7 +182,7 @@ helper = {
             tmp = tmp.replace(/\s/g, ",");
         }
         // strips unwanted characters
-        tmp = tmp.replace(/[^\w\,\.]|[rgb]/g, "");
+        tmp = tmp.replace(/[^\w\,\.]|[rgb]|[rgba]/g, "");
         // prevents extra commas
         if (tmp.substring(16, 17) === ",") {
             tmp = tmp.substring(0, 16);
