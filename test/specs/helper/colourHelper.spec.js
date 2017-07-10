@@ -146,9 +146,7 @@ describe("Tests for helper/colourHelper.js", () => {
 
             expect(ColourHelper.trimRgb("rgb(123,123,123)")).to.equal("123,123,123");
 
-            // bug identified here
-            // not excluding all unwanted characters
-            // expect(ColourHelper.trimRgb("rgba(123,123,123)")).to.equal("123,123,123");
+            expect(ColourHelper.trimRgb("rgba(123,123,123)")).to.equal("123,123,123");
 
             expect(ColourHelper.trimRgb(",")).to.equal("");
 
@@ -170,9 +168,13 @@ describe("Tests for helper/colourHelper.js", () => {
 
             expect(ColourHelper.trimRgb("123,123,123,,")).to.equal("123,123,123,");
 
-            // bug identified here
-            // shouldn't allow initial space or replace space with comma
-            // expect(ColourHelper.trimRgb(" ")).to.equal(",");
+            expect(ColourHelper.trimRgb(" ")).to.equal("");
+
+            expect(ColourHelper.trimRgb("123 ")).to.equal("123,");
+
+            expect(ColourHelper.trimRgb("123 123")).to.equal("123,123");
+
+            expect(ColourHelper.trimRgb("123 123 123")).to.equal("123,123,123");
 
             expect(ColourHelper.trimRgb("1231")).to.equal("123,1");
 

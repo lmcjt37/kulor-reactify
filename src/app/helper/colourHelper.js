@@ -177,12 +177,14 @@ helper = {
         let tmp = JSON.stringify(colour);
         //remove initial comma
         tmp = tmp.replace(/^\",/g, "");
+        //remove initial space
+        tmp = tmp.replace(/^\"\s/g, "");
         //replaces space delimatation with commas
         if (tmp.indexOf(",") === -1) {
             tmp = tmp.replace(/\s/g, ",");
         }
         // strips unwanted characters
-        tmp = tmp.replace(/[^\w\,\.]|[rgb]/g, "");
+        tmp = tmp.replace(/[^\w\,\.]|[rgb]|[rgba]/g, "");
         // prevents extra commas
         if (tmp.substring(16, 17) === ",") {
             tmp = tmp.substring(0, 16);
