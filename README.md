@@ -5,8 +5,8 @@ This is a colour conversion app that allows you to convert colours between RGB, 
 
 Includes:
 * Randomisation
-* Lighten (+10%)
-* Darken (-10%)
+* Lighten (default: +10%, can be controlled by variance slider)
+* Darken (default: -10%, can be controlled by variance slider)
 * Handles alpha and conversion
 * Handy Help Hints to get you going
 * Quickly copy the input for wherever it's needed
