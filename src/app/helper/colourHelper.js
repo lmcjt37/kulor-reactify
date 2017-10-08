@@ -297,9 +297,9 @@ helper = {
 
     randomise: () => getColourObject(tinycolor.random()),
 
-    lighten: (colour) => getColourObject(tinycolor(colour).lighten()),
+    lighten: (colour, variance) => getColourObject(tinycolor(colour).lighten(variance)),
 
-    darken: (colour) => getColourObject(tinycolor(colour).darken())
+    darken: (colour, variance) => getColourObject(tinycolor(colour).darken(variance))
 
 };
 

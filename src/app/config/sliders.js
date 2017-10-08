@@ -18,6 +18,11 @@ const sliders = {
         min: 0.00,
         max: 1.00,
         step: 0.01
+    },
+    variance: {
+        min: 1,
+        max: 100,
+        step: 1
     }
 }
 

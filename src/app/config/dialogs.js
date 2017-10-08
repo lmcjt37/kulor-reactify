@@ -8,7 +8,8 @@ const dialogs = {
             "HUE, SATURATION, and LIGHTNESS represent the HSL colour mode. Hue accepts a value of 0-360, Saturation and Lightness accept a value of 0-100.",
             "Random allows you to quickly find new colours, some good, some bad, some ugly.",
             "Lighten/Darken, lighten and darken the current colour by 10%.",
-            "Alpha allows you to alter your colour with opacity to two decimal places"
+            "Alpha allows you to alter your colour with opacity to two decimal places",
+            "Variance allows you to control the percentage which you can darken and lighten your colour."
         ]
     }
 }

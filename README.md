@@ -5,8 +5,8 @@ This is a colour conversion app that allows you to convert colours between RGB, 
 
 Includes:
 * Randomisation
-* Lighten (+10%)
-* Darken (-10%)
+* Lighten (default: +10%, can be controlled by variance slider)
+* Darken (default: -10%, can be controlled by variance slider)
 * Handles alpha and conversion
 * Handy Help Hints to get you going
 * Quickly copy the input for wherever it's needed
@@ -29,7 +29,6 @@ Working project: http://lmcjt.com/kulor
 - Github corner link was created by [Tim Holman](http://tholman.com/github-corners/)
 
 ### Pipeline
-- lighten/darken percentage +/-
 - Colour palette for storing colours from the session
 - Ability to get different colour combos (triad/complementary/tetrad)
 
@@ -42,3 +41,7 @@ Feel free to contact me directly through twitter @lmcjt or my website [lmcjt.com
 - Contact me directly for further information
 
 It's an ongoing project and contributions, issues or suggestions are welcome. You can contact me by any method you feel comfortable with. I don't adhere to any code of conduct, I just appreciate using your common sense and respecting others. Play nicely :kissing_heart:
+
+## Troubleshooting
+- Make sure to run `npm install` on first run of code to avoid console warnings/errors.
+- If you receive "Node Sass could not find a binding for your current environment" error, try running `npm rebuild node-sass` to build the binding for your current environment.
