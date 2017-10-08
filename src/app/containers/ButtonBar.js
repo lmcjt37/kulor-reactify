@@ -15,10 +15,10 @@ export default class ButtonBar extends React.Component {
                 this.props.onStateChange(ColourHelper.randomise());
                 break;
             case "lighten":
-                this.props.onStateChange(ColourHelper.lighten(this.props.hex));
+                this.props.onStateChange(ColourHelper.lighten(this.props.hex, this.props.variance));
                 break;
             case "darken":
-                this.props.onStateChange(ColourHelper.darken(this.props.hex));
+                this.props.onStateChange(ColourHelper.darken(this.props.hex, this.props.variance));
                 break;
         }
 

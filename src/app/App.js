@@ -31,6 +31,7 @@ export default class App extends React.Component {
             saturation: 29,
             lightness: 28,
             alpha: 1,
+            variance: 10,
             type: '',
             theme: 'light',
             bgColour: '91,50,86,1.0',
@@ -76,14 +77,14 @@ export default class App extends React.Component {
     render() {
         const { header:{ anchor, image }, features, inputs, sliders, dialogs } = config;
         const { fullPage: fullPageClasses, header: headerClasses, centerControls: centerControlsClasses, buttonBar: buttonBarClasses, helpHints: helpHintsClasses } = Main;
-        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, alpha, bgColour, isOpen, isHandheld, isDialogActive, showToast, toastMessage } = this.state;
+        const { rgb, hex, theme, hue, hexOpacity, rgbOpacity, saturation, lightness, alpha, variance, bgColour, isOpen, isHandheld, isDialogActive, showToast, toastMessage } = this.state;
 
 
         let getNavigation = () => {
-            if (isHandheld) {                
-                return <ButtonBar {...{ hex, features, buttonBarClasses }} onStateChange={this.handleStateChange} />;
+            if (isHandheld) {
+                return <ButtonBar {...{ hex, variance, features, buttonBarClasses }} onStateChange={this.handleStateChange} />;
             } else {
-                return <Nav {...{ hex, features, isOpen }} onStateChange={this.handleStateChange} />
+                return <Nav {...{ hex, variance, features, isOpen }} onStateChange={this.handleStateChange} />
             }
         }
 
@@ -99,7 +100,7 @@ export default class App extends React.Component {
                       onStateChange={ this.handleStateChange } />
 
                     <Sliders
-                      {...{ rgb, hex, theme, hue, saturation, lightness, alpha, sliders }}
+                      {...{ rgb, hex, theme, hue, saturation, lightness, alpha, variance, sliders }}
                       onStateChange={ this.handleStateChange } />
                 </div>
 
