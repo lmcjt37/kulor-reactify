@@ -22,10 +22,15 @@ Working project: http://lmcjt.com/kulor
 ## Scripts
 
 `npm run dev` This will run tests with coverage, build the app for development and then start a local server.
+
 `npm run start` This starts the local server on port 8080.
+
 `npm run test` Runs test suite.
+
 `npm run test:coverage` This runs the test suite with coverage reporting.
+
 `npm run build:dev` This will run tests with coverage and build app for development.
+
 `npm run build:prod` This will run tests and then build app for production without additional plugins.
 
 ### Tools
