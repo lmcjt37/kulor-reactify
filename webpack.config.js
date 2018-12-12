@@ -33,7 +33,8 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-            presets: ["es2015", "airbnb", "stage-2"]
+            presets: ["@babel/preset-env","@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-class-properties"]
         }
       }, {
         test: /(\.scss|.css)$/,
