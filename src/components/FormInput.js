@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
 
-import IconButton from '../components/IconButton';
+import IconButton from './IconButton';
 import themedButton from '../theme/themedButton';
 
 export default ({

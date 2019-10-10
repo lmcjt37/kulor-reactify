@@ -64,9 +64,6 @@ export default class App extends React.Component {
 
     componentDidMount() {
         this.handleResizeChange();
-    }
-
-    componentWillMount() {
         window.addEventListener("resize", this.handleResizeChange);
     }
 
