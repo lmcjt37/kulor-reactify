@@ -1,12 +1,21 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+
+const devMode = process.env.NODE_ENV !== 'production';
+const DIST_DIR = path.join(__dirname, 'dist');
+
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html", 
   filename: "./index.html"
 });
 
-const DIST_DIR = path.join(__dirname, 'dist');
-// const devMode = process.env.NODE_ENV !== 'production';
+const cssExtractPlugin = new MiniCssExtractPlugin({
+  // Options similar to the same options in webpackOptions.output
+  // both options are optional
+  filename: devMode ? '[name].css' : '[name].[hash].css',
+  chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+});
 
 module.exports = {
   entry: './src/index.js',
@@ -15,7 +24,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [htmlPlugin],
+  plugins: [htmlPlugin, cssExtractPlugin],
   module: {
     rules: [
       {
@@ -26,14 +35,22 @@ module.exports = {
         }
       },
       {
-        test: /\.(scss|css)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.s?css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader', 
+          'sass-loader'
+        ]
       }
     ]
   },
   resolve: { 
-    modules: ['node_modules', 'src'], 
-    extensions: ['.js', '.jsx', '.scss'] 
+    extensions: ['.js', '.jsx', '.scss']
   },
   devServer: {
     contentBase: DIST_DIR,

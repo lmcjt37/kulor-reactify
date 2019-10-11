@@ -14,24 +14,18 @@ Includes:
 
 ## Getting Started
 1. Clone this repository
-2. Run `npm install && npm run dev`, this will install all dependencies, build and start up the server
-3. Visit `localhost:8080` in your browser (You can also visit the app on your device when on the same network)
+2. Run `npm install && npm start`, this will install all dependencies, build and start up the server
+3. Visit `localhost:9000` in your browser.
 
 Working project: http://lmcjt.com/kulor
 
 ## Scripts
 
-`npm run dev` This will run tests with coverage, build the app for development and then start a local server.
+`npm start` This starts the local server on port 9000.
 
-`npm run start` This starts the local server on port 8080.
+`npm run test` Runs test suite. (TBC)
 
-`npm run test` Runs test suite.
-
-`npm run test:coverage` This runs the test suite with coverage reporting.
-
-`npm run build:dev` This will run tests with coverage and build app for development.
-
-`npm run build:prod` This will run tests and then build app for production without additional plugins.
+`npm run build` This will run tests and then build app for production without additional plugins.
 
 ### Tools
 - React-toolbox (http://react-toolbox.com/)
