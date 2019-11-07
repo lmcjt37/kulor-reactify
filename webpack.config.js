@@ -1,62 +1,60 @@
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const config = {
-  context: __dirname,
-  devtool: 'inline-source-map',
-  entry: [
-    './src/app/client.js'
-  ],
+const devMode = process.env.NODE_ENV !== 'production';
+const DIST_DIR = path.join(__dirname, 'dist');
+
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: "./src/index.html", 
+  filename: "./index.html"
+});
+
+const cssExtractPlugin = new MiniCssExtractPlugin({
+  // Options similar to the same options in webpackOptions.output
+  // both options are optional
+  filename: devMode ? '[name].css' : '[name].[hash].css',
+  chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+});
+
+module.exports = {
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '/src/public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: DIST_DIR,
+    publicPath: '/',
+    filename: 'bundle.js'
   },
-  externals: {
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-  },
-  resolve: {
-    extensions: ['', '.scss', '.css', '.js', '.jsx', '.json'],
-    modulesDirectories: [
-      'node_modules',
-      path.resolve(__dirname, './node_modules')
-    ]
-  },
+  plugins: [htmlPlugin, cssExtractPlugin],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /(\.js|\.jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-            presets: ["@babel/preset-env","@babel/preset-react"],
-            plugins: ["@babel/plugin-proposal-class-properties"]
+        use: {
+          loader: "babel-loader"
         }
-      }, {
-        test: /(\.scss|.css)$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader', 
+          'sass-loader',
+        ]
       }
     ]
   },
-  postcss: [autoprefixer],
-  sassLoader: {
-    data: '@import "theme/_config.scss";',
-    includePaths: [path.resolve(__dirname, './src/app')]
+  resolve: { 
+    extensions: ['.js', '.jsx', '.scss']
   },
-  plugins: [
-    new ExtractTextPlugin('bundle.css', { allChunks: true }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+  devServer: {
+    contentBase: DIST_DIR,
+    hot: true,
+    port: 9000
+  }
 };
-
-if (process.env.NODE_ENV !== 'production') {
-    config.entry.push('webpack-hot-middleware/client?http://localhost:8080');
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-
-module.exports = config;
