@@ -47,7 +47,7 @@
     "express": "^4.16.4",
     "extract-text-webpack-plugin": "~1.0.1",
     "internal-ip": "~1.2.0",
-    "jsdom": "^9.9.1",
+    "jsdom": "^16.5.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
     "normalize.css": "~4.2.0",
